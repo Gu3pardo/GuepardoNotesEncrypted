@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/Primary" >
+
+    <FrameLayout
+        android:id="@+id/farmListFrame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btnImpressum" >
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/goToAddView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/add_round"
+            android:text="@string/addPlus"
+            android:textColor="@color/TextIcon" />
+    </FrameLayout>
+
+        <Button
+            android:id="@+id/btnImpressum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/button"
+            android:text="@string/impressum"
+            android:textColor="@color/TextIcon" />
+
+</RelativeLayout>

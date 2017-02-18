@@ -1,0 +1,58 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/Background"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:gravity="center"
+        android:text="Login!"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/TextIcon"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginStart="5dp"
+        android:background="@color/TextIcon" />
+
+    <EditText
+        android:id="@+id/passwordInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="25dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/Background"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="Enter your password"
+        android:inputType="textPassword"
+        android:padding="10dp"
+        android:textColor="@color/TextIcon" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginStart="5dp"
+        android:background="@color/TextIcon" />
+
+    <Button
+        android:id="@+id/buttonLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/button_blank"
+        android:text="Login"
+        android:textColor="@color/TextIcon" />
+
+</LinearLayout>
