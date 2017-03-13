@@ -1,8 +1,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical"
-    android:background="@color/Background" >
+    android:background="@color/Background"
+    android:orientation="vertical" >
 
     <TextView
         android:layout_width="match_parent"
@@ -21,6 +21,14 @@
         android:layout_marginStart="5dp"
         android:background="@color/TextIcon" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:gravity="center"
+        android:text="Use at least one number, one lower char, one upper char and a sign! Length has to be at least 8!"
+        android:textColor="@color/TextIcon" />
+
     <EditText
         android:id="@+id/passwordInput"
         android:layout_width="match_parent"
@@ -28,7 +36,7 @@
         android:layout_marginEnd="25dp"
         android:layout_marginStart="25dp"
         android:layout_marginTop="5dp"
-    	android:background="@color/Background"
+        android:background="@color/Background"
         android:ems="10"
         android:gravity="center"
         android:hint="Enter your password"
@@ -57,7 +65,7 @@
         android:layout_marginEnd="25dp"
         android:layout_marginStart="25dp"
         android:layout_marginTop="5dp"
-    	android:background="@color/Background"
+        android:background="@color/Background"
         android:ems="10"
         android:gravity="center"
         android:hint="Reenter your password"

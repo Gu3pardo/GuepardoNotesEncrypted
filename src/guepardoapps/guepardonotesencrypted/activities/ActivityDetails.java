@@ -20,16 +20,21 @@ import es.dmoral.toasty.Toasty;
 
 import guepardoapps.guepardonotesencrypted.R;
 import guepardoapps.guepardonotesencrypted.common.Colors;
+import guepardoapps.guepardonotesencrypted.common.Enables;
 import guepardoapps.guepardonotesencrypted.common.Bundles;
 import guepardoapps.guepardonotesencrypted.controller.*;
 import guepardoapps.guepardonotesencrypted.model.Note;
 
+import guepardoapps.toolset.common.Logger;
 import guepardoapps.toolset.controller.DialogController;
+import guepardoapps.toolset.controller.MailController;
+import guepardoapps.toolset.controller.NavigationController;
 import guepardoapps.toolset.controller.NetworkController;
-import guepardoapps.toolset.services.MailService;
-import guepardoapps.toolset.services.NavigationService;
 
 public class ActivityDetails extends Activity {
+
+	private static final String TAG = ActivityDetails.class.getSimpleName();
+	private Logger _logger;
 
 	private boolean _noteEdited;
 	private Note _note;
@@ -46,12 +51,14 @@ public class ActivityDetails extends Activity {
 
 	private DatabaseController _databaseController;
 	private DialogController _dialogController;
-	private MailService _mailService;
-	private NavigationService _navigationService;
+	private MailController _mailController;
+	private NavigationController _navigationController;
 	private NetworkController _networkController;
 
-	private Runnable updateNoteCallback = new Runnable() {
+	private Runnable _updateNoteCallback = new Runnable() {
 		public void run() {
+			_logger.Debug("_updateNoteCallback run");
+
 			if (_passphrase == null) {
 				Toasty.error(_context, "Failed to read passphrase!", Toast.LENGTH_LONG).show();
 				finish();
@@ -62,20 +69,24 @@ public class ActivityDetails extends Activity {
 		}
 	};
 
-	private Runnable deleteNoteCallback = new Runnable() {
+	private Runnable _deleteNoteCallback = new Runnable() {
 		public void run() {
+			_logger.Debug("_deleteNoteCallback run");
+
 			if (_passphrase == null) {
 				Toasty.error(_context, "Failed to read passphrase!", Toast.LENGTH_LONG).show();
 				finish();
 			}
 
 			_databaseController.DeleteNote(_passphrase, _note);
-			_navigationService.NavigateTo(ActivityNotes.class, true);
+			_navigationController.NavigateTo(ActivityNotes.class, true);
 		}
 	};
 
-	private Runnable showOriginalNoteCallback = new Runnable() {
+	private Runnable _showOriginalNoteCallback = new Runnable() {
 		public void run() {
+			_logger.Debug("_showOriginalNoteCallback run");
+
 			_note = _originalNote;
 			resetEditable();
 			_titleView.setText(_note.GetTitle());
@@ -89,6 +100,9 @@ public class ActivityDetails extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.side_details);
 		getActionBar().setBackgroundDrawable(new ColorDrawable(Colors.ACTION_BAR));
+
+		_logger = new Logger(TAG, Enables.DEBUGGING);
+		_logger.Debug("onCreate");
 
 		_context = this;
 
@@ -104,8 +118,8 @@ public class ActivityDetails extends Activity {
 		_databaseController = new DatabaseController(_context);
 		_dialogController = new DialogController(_context, getResources().getColor(R.color.TextIcon),
 				getResources().getColor(R.color.Primary));
-		_mailService = new MailService(_context);
-		_navigationService = new NavigationService(_context);
+		_mailController = new MailController(_context);
+		_navigationController = new NavigationController(_context);
 		_networkController = new NetworkController(_context, _dialogController);
 
 		Bundle details = getIntent().getExtras();
@@ -166,6 +180,8 @@ public class ActivityDetails extends Activity {
 		_btnEditSave.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				_logger.Debug("_btnEditSave onClick");
+
 				if (_noteEdited) {
 					if (_passphrase == null) {
 						Toasty.error(_context, "Failed to read passphrase!", Toast.LENGTH_LONG).show();
@@ -183,9 +199,11 @@ public class ActivityDetails extends Activity {
 		_btnDelete.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				_logger.Debug("_btnDelete onClick");
+
 				if (!_noteEdited) {
 					_dialogController.ShowDialogDouble("Delete Note?", "Do you want to delete the note?", "Yes",
-							deleteNoteCallback, "No", _dialogController.CloseDialogCallback, true);
+							_deleteNoteCallback, "No", _dialogController.CloseDialogCallback, true);
 				}
 			}
 		});
@@ -194,8 +212,10 @@ public class ActivityDetails extends Activity {
 		_btnMail.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				_logger.Debug("_btnMail onClick");
+
 				if (_networkController.IsNetworkAvailable()) {
-					_mailService.SendMailWithContent(_note.GetTitle(), _note.GetContent(), false);
+					_mailController.SendMailWithContent(_note.GetTitle(), _note.GetContent(), false);
 				} else {
 					Toasty.warning(_context, "Sorry, no network available!", Toast.LENGTH_SHORT).show();
 				}
@@ -205,16 +225,19 @@ public class ActivityDetails extends Activity {
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		_logger.Debug("onKeyDown");
+
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			if (_noteEdited) {
 				_dialogController.ShowDialogTriple("Warning!",
-						"The created note is not saved! Do you want to save the note?", "Yes", updateNoteCallback, "No",
-						showOriginalNoteCallback, "Cancel", _dialogController.CloseDialogCallback, true);
+						"The created note is not saved! Do you want to save the note?", "Yes", _updateNoteCallback,
+						"No", _showOriginalNoteCallback, "Cancel", _dialogController.CloseDialogCallback, true);
 			} else {
-				_navigationService.NavigateTo(ActivityNotes.class, true);
+				_navigationController.NavigateTo(ActivityNotes.class, true);
 			}
 			return true;
 		}
+
 		return super.onKeyDown(keyCode, event);
 	}
 

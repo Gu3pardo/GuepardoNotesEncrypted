@@ -15,22 +15,30 @@ import android.widget.TextView;
 import guepardoapps.guepardonotesencrypted.R;
 import guepardoapps.guepardonotesencrypted.activities.ActivityDetails;
 import guepardoapps.guepardonotesencrypted.common.Bundles;
+import guepardoapps.guepardonotesencrypted.common.Enables;
 import guepardoapps.guepardonotesencrypted.model.Note;
 
-import guepardoapps.toolset.services.NavigationService;
+import guepardoapps.toolset.common.Logger;
+import guepardoapps.toolset.controller.NavigationController;
 
 public class NoteListAdapter extends BaseAdapter {
 
+	private static final String TAG = NoteListAdapter.class.getSimpleName();
+	private Logger _logger;
+
 	private Context _context;
-	private NavigationService _navigationService;
+	private NavigationController _navigationController;
 
 	private ArrayList<Note> _notes;
 
 	private static LayoutInflater _inflater = null;
 
 	public NoteListAdapter(Context context, ArrayList<Note> notes) {
+		_logger = new Logger(TAG, Enables.DEBUGGING);
+		_logger.Debug("created...");
+
 		_context = context;
-		_navigationService = new NavigationService(_context);
+		_navigationController = new NavigationController(_context);
 
 		_notes = notes;
 
@@ -67,13 +75,14 @@ public class NoteListAdapter extends BaseAdapter {
 		holder._title.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				_logger.Debug("_title onClick");
 
 				Bundle details = new Bundle();
 				details.putInt(Bundles.NOTE_ID, _notes.get(index).GetId());
 				details.putString(Bundles.NOTE_TITLE, _notes.get(index).GetTitle());
 				details.putString(Bundles.NOTE_CONTENT, _notes.get(index).GetContent());
 
-				_navigationService.NavigateWithData(ActivityDetails.class, details, true);
+				_navigationController.NavigateWithData(ActivityDetails.class, details, true);
 			}
 		});
 

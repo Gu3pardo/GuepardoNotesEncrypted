@@ -110,7 +110,7 @@ public final class R {
         public static final int bar=0x7f09001a;
         public static final int btnDelete=0x7f090018;
         public static final int btnEditSave=0x7f090017;
-        public static final int btnImpressum=0x7f09001d;
+        public static final int btnImpressum=0x7f09001f;
         public static final int btnMail=0x7f090015;
         public static final int btnSave=0x7f090013;
         public static final int buttonLogin=0x7f09000b;
@@ -123,24 +123,26 @@ public final class R {
         public static final int custom_alert_dialog_title=0x7f090001;
         public static final int detailContent=0x7f090016;
         public static final int detailTitle=0x7f090014;
-        public static final int farmListFrame=0x7f09001c;
+        public static final int farmListFrame=0x7f09001e;
         public static final int floating_message_background=0x7f09000c;
         public static final int floating_message_text=0x7f09000e;
         public static final int floating_message_title=0x7f09000d;
-        public static final int goToAddView=0x7f090020;
-        public static final int impressumContent=0x7f09001b;
+        public static final int goToAddView=0x7f090022;
+        public static final int impressumAuthor=0x7f09001b;
+        public static final int impressumEmail=0x7f09001c;
+        public static final int impressumGithub=0x7f09001d;
         public static final int itemTitle=0x7f09000f;
-        public static final int listView=0x7f09001f;
+        public static final int listView=0x7f090021;
         public static final int notes=0x7f090010;
         public static final int passwordCheckTextView=0x7f090009;
         public static final int passwordInput=0x7f090006;
         public static final int passwordReenterInput=0x7f090008;
         public static final int passwordStrengthTextView=0x7f090007;
-        public static final int progressBar=0x7f09001e;
+        public static final int progressBar=0x7f090020;
         public static final int title_impressum=0x7f090019;
-        public static final int toast_icon=0x7f090022;
-        public static final int toast_root=0x7f090021;
-        public static final int toast_text=0x7f090023;
+        public static final int toast_icon=0x7f090024;
+        public static final int toast_root=0x7f090023;
+        public static final int toast_text=0x7f090025;
     }
     public static final class layout {
         public static final int custom_dialog_1=0x7f030000;
@@ -163,6 +165,7 @@ public final class R {
         public static final int advanced_settings=0x7f050033;
         public static final int app_intro=0x7f05002f;
         public static final int app_name=0x7f050000;
+        public static final int author=0x7f05004d;
         public static final int back=0x7f05003f;
         /** Detail page strings
 Detail page strings
@@ -277,7 +280,7 @@ Detail page strings
          */
         public static final int circle_button_content_desc=0x7f050016;
         public static final int content=0x7f050043;
-        public static final int contentDescription=0x7f05004e;
+        public static final int contentDescription=0x7f050050;
         public static final int create=0x7f050039;
         public static final int delete=0x7f05003b;
         public static final int detail_bluetooth_address=0x7f050010;
@@ -292,12 +295,13 @@ Detail page strings
         public static final int dismiss_overlay_button_label=0x7f050038;
         public static final int distance=0x7f050015;
         public static final int edit=0x7f05003a;
+        public static final int email=0x7f05004e;
         public static final int example=0x7f05004b;
+        public static final int githubLink=0x7f05004f;
         public static final int hint=0x7f050048;
         public static final int hint_add_content=0x7f05004a;
         public static final int hint_add_title=0x7f050049;
         public static final int impressum=0x7f05004c;
-        public static final int impressumContent=0x7f05004d;
         /**  List item strings 
  List item strings 
  List item strings 
@@ -332,7 +336,7 @@ Detail page strings
         public static final int notes=0x7f050041;
         public static final int ok=0x7f050046;
         public static final int please_enable_bluetooth=0x7f05000a;
-        public static final int poweredby=0x7f05004f;
+        public static final int poweredby=0x7f050051;
         public static final int pref_beacon_format=0x7f050037;
         public static final int pref_beacon_format_summary=0x7f050036;
         public static final int pref_between_scan_period_summary=0x7f050021;
