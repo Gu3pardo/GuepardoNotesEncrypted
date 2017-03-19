@@ -1,0 +1,127 @@
+guepardoapps.classes.Note -> guepardoapps.a.a:
+    int _id -> a
+    java.lang.String _title -> b
+    java.lang.String _content -> c
+    int GetId() -> a
+    java.lang.String GetTitle() -> b
+    java.lang.String GetContent() -> c
+    void SetContent(java.lang.String) -> a
+guepardoapps.common.Constants -> guepardoapps.b.a:
+    boolean DEBUGGING_ENABLED -> a
+    int ACTION_BAR_COLOR -> b
+    java.lang.String DATABASE_NAME -> c
+    java.lang.String DATABASE_TABLE -> d
+    int DATABASE_VERSION -> e
+    java.lang.String DATABASE_KEY_ROWID -> f
+    java.lang.String DATABASE_KEY_TITLE -> g
+    java.lang.String DATABASE_KEY_NOTES -> h
+    java.lang.String SHARED_PREF_NAME -> i
+guepardoapps.controller.DatabaseController -> guepardoapps.c.a:
+    android.content.Context _context -> a
+    guepardoapps.database.Database _database -> b
+    java.util.ArrayList GetNotes() -> a
+    void SaveNote(guepardoapps.classes.Note) -> a
+    void UpdateNote(guepardoapps.classes.Note) -> b
+    void DeleteNote(guepardoapps.classes.Note) -> c
+guepardoapps.controller.SharedPrefController -> guepardoapps.c.b:
+    android.content.Context _context -> a
+    android.content.SharedPreferences _preferences -> b
+    boolean SaveBooleanValue(java.lang.String,boolean) -> a
+    java.lang.Boolean LoadBooleanValueFromSharedPreferences(java.lang.String) -> a
+guepardoapps.database.Database -> guepardoapps.d.a:
+    java.lang.String KEY_ROWID -> a
+    java.lang.String KEY_TITLE -> b
+    java.lang.String KEY_NOTES -> c
+    java.lang.String DATABASE_NAME -> d
+    java.lang.String DATABASE_TABLE -> e
+    int DATABASE_VERSION -> f
+    guepardoapps.database.Database$DbHelper helper -> g
+    android.content.Context context -> h
+    android.database.sqlite.SQLiteDatabase database -> i
+    guepardoapps.database.Database Open() -> a
+    void Close() -> b
+    long CreateEntry(guepardoapps.classes.Note) -> a
+    java.util.ArrayList GetNotes() -> c
+    void Delete(guepardoapps.classes.Note) -> b
+    void Update(guepardoapps.classes.Note) -> c
+    java.lang.String access$0() -> d
+    int access$1() -> e
+    java.lang.String access$2() -> f
+guepardoapps.database.Database$DbHelper -> guepardoapps.d.b:
+    void onCreate(android.database.sqlite.SQLiteDatabase) -> onCreate
+    void onUpgrade(android.database.sqlite.SQLiteDatabase,int,int) -> onUpgrade
+guepardoapps.guepardonotes.Boot -> guepardoapps.guepardonotes.Boot:
+    android.content.Context _context -> a
+    guepardoapps.controller.DatabaseController _databaseController -> b
+    guepardoapps.controller.SharedPrefController _sharedPrefController -> c
+    void onCreate(android.os.Bundle) -> onCreate
+    void onResume() -> onResume
+    void onPause() -> onPause
+    void onDestroy() -> onDestroy
+    void start() -> a
+guepardoapps.guepardonotes.Main -> guepardoapps.guepardonotes.Main:
+    guepardoapps.controller.DatabaseController _databaseController -> a
+    android.content.Context _context -> b
+    android.widget.TableRow Utils -> c
+    android.widget.TableRow Utils2 -> d
+    android.widget.Button Cancel -> e
+    android.widget.Button Create -> f
+    android.widget.Button Send -> g
+    android.widget.Button Edit -> h
+    android.widget.Button Delete -> i
+    android.widget.EditText edit -> j
+    boolean editing -> k
+    boolean creating -> l
+    guepardoapps.classes.Note _selectedNote -> m
+    void onCreate(android.os.Bundle) -> onCreate
+    void onResume() -> onResume
+    void onPause() -> onPause
+    void onDestroy() -> onDestroy
+    void start() -> a
+    void loadData() -> b
+    void hideEditUtils() -> c
+    void save(guepardoapps.classes.Note) -> a
+    void update(guepardoapps.classes.Note) -> b
+    void delete(guepardoapps.classes.Note) -> c
+    void warning(java.lang.String) -> a
+    void senddata() -> d
+    boolean access$0(guepardoapps.guepardonotes.Main) -> a
+    android.widget.Button access$1(guepardoapps.guepardonotes.Main) -> b
+    android.widget.EditText access$2(guepardoapps.guepardonotes.Main) -> c
+    android.widget.Button access$3(guepardoapps.guepardonotes.Main) -> d
+    void access$4(guepardoapps.guepardonotes.Main,boolean) -> a
+    void access$5(guepardoapps.guepardonotes.Main,java.lang.String) -> a
+    void access$6(guepardoapps.guepardonotes.Main,guepardoapps.classes.Note) -> a
+    void access$7(guepardoapps.guepardonotes.Main) -> e
+    boolean access$8(guepardoapps.guepardonotes.Main) -> f
+    android.widget.Button access$9(guepardoapps.guepardonotes.Main) -> g
+    guepardoapps.classes.Note access$10(guepardoapps.guepardonotes.Main) -> h
+    void access$11(guepardoapps.guepardonotes.Main,boolean) -> b
+    void access$12(guepardoapps.guepardonotes.Main) -> i
+    void access$13(guepardoapps.guepardonotes.Main,guepardoapps.classes.Note) -> b
+    void access$14(guepardoapps.guepardonotes.Main,guepardoapps.classes.Note) -> c
+    void access$15(guepardoapps.guepardonotes.Main) -> j
+    void access$16(guepardoapps.guepardonotes.Main,guepardoapps.classes.Note) -> d
+    android.widget.TableRow access$17(guepardoapps.guepardonotes.Main) -> k
+    android.widget.TableRow access$18(guepardoapps.guepardonotes.Main) -> l
+    android.widget.Button access$19(guepardoapps.guepardonotes.Main) -> m
+    android.widget.Button access$20(guepardoapps.guepardonotes.Main) -> n
+guepardoapps.guepardonotes.Main$1 -> guepardoapps.guepardonotes.a:
+    guepardoapps.guepardonotes.Main this$0 -> a
+    void onClick(android.view.View) -> onClick
+guepardoapps.guepardonotes.Main$2 -> guepardoapps.guepardonotes.b:
+    guepardoapps.guepardonotes.Main this$0 -> a
+    void onClick(android.view.View) -> onClick
+guepardoapps.guepardonotes.Main$3 -> guepardoapps.guepardonotes.c:
+    guepardoapps.guepardonotes.Main this$0 -> a
+    void onClick(android.view.View) -> onClick
+guepardoapps.guepardonotes.Main$4 -> guepardoapps.guepardonotes.d:
+    guepardoapps.guepardonotes.Main this$0 -> a
+    void onClick(android.view.View) -> onClick
+guepardoapps.guepardonotes.Main$5 -> guepardoapps.guepardonotes.e:
+    guepardoapps.guepardonotes.Main this$0 -> a
+    void onClick(android.view.View) -> onClick
+guepardoapps.guepardonotes.Main$6 -> guepardoapps.guepardonotes.f:
+    guepardoapps.guepardonotes.Main this$0 -> a
+    java.util.ArrayList val$notes -> b
+    void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick

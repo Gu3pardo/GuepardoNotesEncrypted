@@ -4,7 +4,7 @@
  * aapt tool from the resource data it found.  It
  * should not be modified by hand.
  */
-package es.dmoral.toasty;
+package guepardoapps.library.toastview;
 
 public final class R {
 	public static final class drawable {
@@ -17,14 +17,15 @@ public final class R {
 		public static final int toast_frame = 0x7f020016;
 	}
 	public static final class id {
-		public static final int toast_icon = 0x7f090024;
+		public static final int icon = 0x7f090024;
+		public static final int text = 0x7f090025;
 		public static final int toast_root = 0x7f090023;
-		public static final int toast_text = 0x7f090025;
 	}
 	public static final class layout {
-		public static final int toast_layout = 0x7f03000c;
+		public static final int toast = 0x7f03000c;
 	}
 	public static final class string {
 		public static final int app_name = 0x7f050000;
+		public static final int contentDescription = 0x7f050001;
 	}
 }

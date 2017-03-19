@@ -16,14 +16,14 @@ import android.widget.ImageButton;
 import android.widget.Scroller;
 import android.widget.Toast;
 
-import es.dmoral.toasty.Toasty;
-
 import guepardoapps.guepardonotesencrypted.R;
 import guepardoapps.guepardonotesencrypted.common.Colors;
 import guepardoapps.guepardonotesencrypted.common.Enables;
 import guepardoapps.guepardonotesencrypted.common.Bundles;
 import guepardoapps.guepardonotesencrypted.controller.*;
 import guepardoapps.guepardonotesencrypted.model.Note;
+
+import guepardoapps.library.toastview.ToastView;
 
 import guepardoapps.toolset.common.Logger;
 import guepardoapps.toolset.controller.DialogController;
@@ -60,7 +60,7 @@ public class ActivityDetails extends Activity {
 			_logger.Debug("_updateNoteCallback run");
 
 			if (_passphrase == null) {
-				Toasty.error(_context, "Failed to read passphrase!", Toast.LENGTH_LONG).show();
+				ToastView.error(_context, "Failed to read passphrase!", Toast.LENGTH_LONG).show();
 				finish();
 			}
 
@@ -74,7 +74,7 @@ public class ActivityDetails extends Activity {
 			_logger.Debug("_deleteNoteCallback run");
 
 			if (_passphrase == null) {
-				Toasty.error(_context, "Failed to read passphrase!", Toast.LENGTH_LONG).show();
+				ToastView.error(_context, "Failed to read passphrase!", Toast.LENGTH_LONG).show();
 				finish();
 			}
 
@@ -108,7 +108,7 @@ public class ActivityDetails extends Activity {
 
 		String passphrase = getIntent().getStringExtra(Bundles.PASSPHRASE);
 		if (passphrase == null) {
-			Toasty.error(_context, "Failed to read passphrase!", Toast.LENGTH_LONG).show();
+			ToastView.error(_context, "Failed to read passphrase!", Toast.LENGTH_LONG).show();
 			finish();
 		}
 		_passphrase = passphrase;
@@ -184,7 +184,7 @@ public class ActivityDetails extends Activity {
 
 				if (_noteEdited) {
 					if (_passphrase == null) {
-						Toasty.error(_context, "Failed to read passphrase!", Toast.LENGTH_LONG).show();
+						ToastView.error(_context, "Failed to read passphrase!", Toast.LENGTH_LONG).show();
 						finish();
 					}
 
@@ -217,7 +217,7 @@ public class ActivityDetails extends Activity {
 				if (_networkController.IsNetworkAvailable()) {
 					_mailController.SendMailWithContent(_note.GetTitle(), _note.GetContent(), false);
 				} else {
-					Toasty.warning(_context, "Sorry, no network available!", Toast.LENGTH_SHORT).show();
+					ToastView.warning(_context, "Sorry, no network available!", Toast.LENGTH_SHORT).show();
 				}
 			}
 		});

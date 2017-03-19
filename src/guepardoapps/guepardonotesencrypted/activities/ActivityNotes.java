@@ -13,8 +13,6 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import es.dmoral.toasty.Toasty;
-
 import guepardoapps.guepardonotesencrypted.R;
 import guepardoapps.guepardonotesencrypted.common.Bundles;
 import guepardoapps.guepardonotesencrypted.common.Colors;
@@ -22,6 +20,8 @@ import guepardoapps.guepardonotesencrypted.common.Enables;
 import guepardoapps.guepardonotesencrypted.controller.DatabaseController;
 import guepardoapps.guepardonotesencrypted.customadapter.NoteListAdapter;
 import guepardoapps.guepardonotesencrypted.model.Note;
+
+import guepardoapps.library.toastview.ToastView;
 
 import guepardoapps.toolset.common.Logger;
 import guepardoapps.toolset.controller.NavigationController;
@@ -58,7 +58,7 @@ public class ActivityNotes extends Activity {
 
 		String passphrase = getIntent().getStringExtra(Bundles.PASSPHRASE);
 		if (passphrase == null) {
-			Toasty.error(_context, "Failed to read passphrase!", Toast.LENGTH_LONG).show();
+			ToastView.error(_context, "Failed to read passphrase!", Toast.LENGTH_LONG).show();
 			finish();
 		}
 		_passphrase = passphrase;
@@ -98,7 +98,7 @@ public class ActivityNotes extends Activity {
 
 		if (_created) {
 			if (_passphrase == null) {
-				Toasty.error(_context, "Failed to read passphrase!", Toast.LENGTH_LONG).show();
+				ToastView.error(_context, "Failed to read passphrase!", Toast.LENGTH_LONG).show();
 				finish();
 			}
 

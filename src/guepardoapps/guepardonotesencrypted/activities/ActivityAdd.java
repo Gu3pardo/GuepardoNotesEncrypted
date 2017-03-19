@@ -15,14 +15,14 @@ import android.widget.EditText;
 import android.widget.Scroller;
 import android.widget.Toast;
 
-import es.dmoral.toasty.Toasty;
-
 import guepardoapps.guepardonotesencrypted.R;
 import guepardoapps.guepardonotesencrypted.common.Bundles;
 import guepardoapps.guepardonotesencrypted.common.Colors;
 import guepardoapps.guepardonotesencrypted.common.Enables;
 import guepardoapps.guepardonotesencrypted.controller.DatabaseController;
 import guepardoapps.guepardonotesencrypted.model.Note;
+
+import guepardoapps.library.toastview.ToastView;
 
 import guepardoapps.toolset.common.Logger;
 import guepardoapps.toolset.controller.DialogController;
@@ -52,17 +52,17 @@ public class ActivityAdd extends Activity {
 			_logger.Debug("_trySaveNewNoteCallback run");
 
 			if (_title == "") {
-				Toasty.warning(_context, "Please enter a title!", Toast.LENGTH_SHORT).show();
+				ToastView.warning(_context, "Please enter a title!", Toast.LENGTH_SHORT).show();
 				return;
 			}
 
 			if (_content == "") {
-				Toasty.warning(_context, "Please enter a note!", Toast.LENGTH_SHORT).show();
+				ToastView.warning(_context, "Please enter a note!", Toast.LENGTH_SHORT).show();
 				return;
 			}
 
 			if (_passphrase == null) {
-				Toasty.error(_context, "Failed to read passphrase!", Toast.LENGTH_LONG).show();
+				ToastView.error(_context, "Failed to read passphrase!", Toast.LENGTH_LONG).show();
 				finish();
 			}
 
@@ -93,7 +93,7 @@ public class ActivityAdd extends Activity {
 
 		String passphrase = getIntent().getStringExtra(Bundles.PASSPHRASE);
 		if (passphrase == null) {
-			Toasty.error(_context, "Failed to read passphrase!", Toast.LENGTH_LONG).show();
+			ToastView.error(_context, "Failed to read passphrase!", Toast.LENGTH_LONG).show();
 			finish();
 		}
 		_passphrase = passphrase;

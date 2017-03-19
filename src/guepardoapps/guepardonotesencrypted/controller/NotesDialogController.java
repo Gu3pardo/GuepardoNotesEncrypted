@@ -15,12 +15,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import es.dmoral.toasty.Toasty;
-
 import guepardoapps.guepardonotesencrypted.R;
 import guepardoapps.guepardonotesencrypted.common.SharedPrefConstants;
 import guepardoapps.guepardonotesencrypted.helper.PasswordStrengthHelper;
 import guepardoapps.guepardonotesencrypted.model.Note;
+
+import guepardoapps.library.toastview.ToastView;
 
 import guepardoapps.toolset.controller.DialogController;
 import guepardoapps.toolset.controller.SharedPrefController;
@@ -126,17 +126,17 @@ public class NotesDialogController extends DialogController {
 			@Override
 			public void onClick(View view) {
 				if (!_isPasswordLongEnough) {
-					Toasty.error(_context, "Password is too short!", Toast.LENGTH_SHORT).show();
+					ToastView.error(_context, "Password is too short!", Toast.LENGTH_SHORT).show();
 					return;
 				}
 
 				if (!_isPasswordValid) {
-					Toasty.error(_context, "Password not valid!", Toast.LENGTH_SHORT).show();
+					ToastView.error(_context, "Password not valid!", Toast.LENGTH_SHORT).show();
 					return;
 				}
 
 				if (!_doPasswordsMatch) {
-					Toasty.error(_context, "Passwords do not match!", Toast.LENGTH_SHORT).show();
+					ToastView.error(_context, "Passwords do not match!", Toast.LENGTH_SHORT).show();
 					return;
 				}
 
@@ -170,12 +170,12 @@ public class NotesDialogController extends DialogController {
 			public void onClick(View view) {
 				String password = passwordInput.getText().toString();
 				if (password == null) {
-					Toasty.error(_context, "Login failed!", Toast.LENGTH_LONG).show();
+					ToastView.error(_context, "Login failed!", Toast.LENGTH_LONG).show();
 					return;
 				}
 
 				if (_databaseController.GetNotes(password) == null) {
-					Toasty.error(_context, "Login failed!", Toast.LENGTH_LONG).show();
+					ToastView.error(_context, "Login failed!", Toast.LENGTH_LONG).show();
 					return;
 				}
 
