@@ -27,11 +27,9 @@ public class Database {
 
 		@Override
 		public void onCreate(SQLiteDatabase database) {
-			database.execSQL(
-					" CREATE TABLE " + DbConstants.TABLE + " ( " 
-							+ DbConstants.KEY_ROWID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-							+ DbConstants.KEY_TITLE + " TEXT NOT NULL, " 
-							+ DbConstants.KEY_NOTES + " TEXT NOT NULL); ");
+			database.execSQL(" CREATE TABLE " + DbConstants.TABLE + " ( " + DbConstants.KEY_ROWID
+					+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + DbConstants.KEY_TITLE + " TEXT NOT NULL, "
+					+ DbConstants.KEY_NOTES + " TEXT NOT NULL); ");
 		}
 
 		@Override
@@ -69,10 +67,7 @@ public class Database {
 	}
 
 	public ArrayList<Note> GetNotes() {
-		String[] columns = new String[] { 
-				DbConstants.KEY_ROWID, 
-				DbConstants.KEY_TITLE, 
-				DbConstants.KEY_NOTES };
+		String[] columns = new String[] { DbConstants.KEY_ROWID, DbConstants.KEY_TITLE, DbConstants.KEY_NOTES };
 		Cursor cursor = _database.query(DbConstants.TABLE, columns, null, null, null, null, null);
 		ArrayList<Note> result = new ArrayList<Note>();
 
@@ -81,12 +76,11 @@ public class Database {
 		int noteIndex = cursor.getColumnIndex(DbConstants.KEY_NOTES);
 
 		for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-			result.add(new Note(
-					cursor.getInt(idIndex), 
-					cursor.getString(titleIndex), 
-					cursor.getString(noteIndex), 
-					0, 0, 0));
+			result.add(new Note(cursor.getInt(idIndex), cursor.getString(titleIndex), cursor.getString(noteIndex), 0, 0,
+					0));
 		}
+
+		cursor.close();
 
 		return result;
 	}

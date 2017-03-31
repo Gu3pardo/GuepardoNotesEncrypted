@@ -1,12 +1,13 @@
 package guepardoapps.guepardonotesencrypted.model;
 
+import android.annotation.SuppressLint;
 import java.io.Serializable;
 import java.util.Calendar;
 
 public class Note implements Serializable {
 
 	private static final long serialVersionUID = -5496323795937961901L;
-	
+
 	private int _id;
 	private String _title;
 	private String _content;
@@ -47,18 +48,9 @@ public class Note implements Serializable {
 		return _year;
 	}
 
+	@SuppressLint("DefaultLocale")
 	public String GetDateString() {
-		String tempDay = String.valueOf(_day);
-		while (tempDay.length() < 2) {
-			tempDay = "0" + tempDay;
-		}
-
-		String tempMonth = String.valueOf(_month);
-		while (tempMonth.length() < 2) {
-			tempMonth = "0" + tempMonth;
-		}
-
-		return tempDay + "." + tempMonth + "." + String.valueOf(_year);
+		return String.format("%02d.%02d.%04d", _day, _month, _year);
 	}
 
 	public void UpdateNote(String title, String content) {

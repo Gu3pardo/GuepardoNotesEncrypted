@@ -18,8 +18,8 @@ import guepardoapps.guepardonotesencrypted.common.Bundles;
 import guepardoapps.guepardonotesencrypted.common.Enables;
 import guepardoapps.guepardonotesencrypted.model.Note;
 
-import guepardoapps.toolset.common.Logger;
-import guepardoapps.toolset.controller.NavigationController;
+import guepardoapps.library.toolset.common.Logger;
+import guepardoapps.library.toolset.controller.NavigationController;
 
 public class NoteListAdapter extends BaseAdapter {
 

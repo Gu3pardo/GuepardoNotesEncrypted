@@ -11,9 +11,9 @@ import guepardoapps.guepardonotesencrypted.common.Enables;
 import guepardoapps.guepardonotesencrypted.common.SharedPrefConstants;
 import guepardoapps.guepardonotesencrypted.controller.NotesDialogController;
 
-import guepardoapps.toolset.common.Logger;
-import guepardoapps.toolset.controller.NavigationController;
-import guepardoapps.toolset.controller.SharedPrefController;
+import guepardoapps.library.toolset.common.Logger;
+import guepardoapps.library.toolset.controller.NavigationController;
+import guepardoapps.library.toolset.controller.SharedPrefController;
 
 public class ActivityBoot extends Activity {
 
@@ -23,7 +23,7 @@ public class ActivityBoot extends Activity {
 	private Context _context;
 
 	private NavigationController _navigationController;
-	private NotesDialogController _dialogController;
+	private NotesDialogController _notesDialogController;
 	private SharedPrefController _sharedPrefController;
 
 	private Runnable _navigateToMainRunnable = new Runnable() {
@@ -45,20 +45,34 @@ public class ActivityBoot extends Activity {
 		_logger.Debug("onCreate");
 
 		_context = this;
-		_dialogController = new NotesDialogController(_context);
+		_notesDialogController = new NotesDialogController(_context);
 		_navigationController = new NavigationController(_context);
 		_sharedPrefController = new SharedPrefController(_context, SharedPrefConstants.SHARED_PREF_NAME);
 
 		if (!_sharedPrefController.LoadBooleanValueFromSharedPreferences(SharedPrefConstants.SHARED_PREF_NAME)) {
-			_dialogController.ShowDialogFirstLogin(_navigateToMainRunnable);
+			_notesDialogController.ShowDialogFirstLogin(_navigateToMainRunnable);
 		} else {
-			_dialogController.ShowDialogLogin(_navigateToMainRunnable);
+			_notesDialogController.ShowDialogLogin(_navigateToMainRunnable);
 		}
 	}
 
+	@Override
+	protected void onPause() {
+		super.onPause();
+		_logger.Debug("onPause");
+	}
+
+	@Override
 	protected void onResume() {
 		super.onResume();
 		_logger.Debug("onResume");
 		_navigationController.NavigateTo(ActivityNotes.class, true);
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		_logger.Debug("onDestroy");
+		_notesDialogController.Dispose();
 	}
 }

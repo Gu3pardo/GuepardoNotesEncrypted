@@ -13,9 +13,9 @@ import guepardoapps.guepardonotesencrypted.R;
 import guepardoapps.guepardonotesencrypted.common.Colors;
 import guepardoapps.guepardonotesencrypted.common.Enables;
 
-import guepardoapps.toolset.common.Logger;
-import guepardoapps.toolset.controller.MailController;
-import guepardoapps.toolset.controller.NavigationController;
+import guepardoapps.library.toolset.common.Logger;
+import guepardoapps.library.toolset.controller.MailController;
+import guepardoapps.library.toolset.controller.NavigationController;
 
 public class ActivityImpressum extends Activity {
 

@@ -20,13 +20,13 @@ import guepardoapps.guepardonotesencrypted.common.Bundles;
 import guepardoapps.guepardonotesencrypted.common.Colors;
 import guepardoapps.guepardonotesencrypted.common.Enables;
 import guepardoapps.guepardonotesencrypted.controller.DatabaseController;
+import guepardoapps.guepardonotesencrypted.controller.NotesDialogController;
 import guepardoapps.guepardonotesencrypted.model.Note;
 
 import guepardoapps.library.toastview.ToastView;
 
-import guepardoapps.toolset.common.Logger;
-import guepardoapps.toolset.controller.DialogController;
-import guepardoapps.toolset.controller.NavigationController;
+import guepardoapps.library.toolset.common.Logger;
+import guepardoapps.library.toolset.controller.NavigationController;
 
 public class ActivityAdd extends Activity {
 
@@ -35,7 +35,6 @@ public class ActivityAdd extends Activity {
 
 	private String _title;
 	private String _content;
-	private String _passphrase;
 
 	private EditText _editTitle;
 	private EditText _editContent;
@@ -44,7 +43,7 @@ public class ActivityAdd extends Activity {
 	private Context _context;
 
 	private DatabaseController _databaseController;
-	private DialogController _dialogController;
+	private NotesDialogController _notesDialogController;
 	private NavigationController _navigationController;
 
 	private Runnable _trySaveNewNoteCallback = new Runnable() {
@@ -61,12 +60,7 @@ public class ActivityAdd extends Activity {
 				return;
 			}
 
-			if (_passphrase == null) {
-				ToastView.error(_context, "Failed to read passphrase!", Toast.LENGTH_LONG).show();
-				finish();
-			}
-
-			_databaseController.SaveNote(_passphrase, new Note(0, _title, _content, 0, 0, 0));
+			_databaseController.SaveNote(new Note(0, _title, _content, 0, 0, 0));
 			_finishCallback.run();
 		}
 	};
@@ -79,7 +73,6 @@ public class ActivityAdd extends Activity {
 		}
 	};
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -96,11 +89,11 @@ public class ActivityAdd extends Activity {
 			ToastView.error(_context, "Failed to read passphrase!", Toast.LENGTH_LONG).show();
 			finish();
 		}
-		_passphrase = passphrase;
 
-		_databaseController = new DatabaseController(_context);
-		_dialogController = new DialogController(_context, getResources().getColor(R.color.TextIcon),
-				getResources().getColor(R.color.Primary));
+		_databaseController = DatabaseController.getInstance();
+		_databaseController.Initialize(_context, passphrase);
+
+		_notesDialogController = new NotesDialogController(_context);
 		_navigationController = new NavigationController(_context);
 
 		_editTitle = (EditText) findViewById(R.id.addTitle);
@@ -153,14 +146,34 @@ public class ActivityAdd extends Activity {
 	}
 
 	@Override
+	protected void onPause() {
+		super.onPause();
+		_logger.Debug("onPause");
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		_logger.Debug("onResume");
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		_logger.Debug("onDestroy");
+		_databaseController.Dispose();
+		_notesDialogController.Dispose();
+	}
+
+	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			_logger.Debug("onKeyDown");
 
 			if (_title != null || _content != null) {
-				_dialogController.ShowDialogTriple("Warning!",
+				_notesDialogController.ShowDialogTriple("Warning!",
 						"The created note is not saved! Do you want to save the note?", "Yes", _trySaveNewNoteCallback,
-						"No", _finishCallback, "Cancel", _dialogController.CloseDialogCallback, true);
+						"No", _finishCallback, "Cancel", _notesDialogController.CloseDialogCallback, true);
 			} else {
 				_finishCallback.run();
 			}

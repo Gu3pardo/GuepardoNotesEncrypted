@@ -23,8 +23,8 @@ import guepardoapps.guepardonotesencrypted.model.Note;
 
 import guepardoapps.library.toastview.ToastView;
 
-import guepardoapps.toolset.common.Logger;
-import guepardoapps.toolset.controller.NavigationController;
+import guepardoapps.library.toolset.common.Logger;
+import guepardoapps.library.toolset.controller.NavigationController;
 
 public class ActivityNotes extends Activity {
 
@@ -34,7 +34,6 @@ public class ActivityNotes extends Activity {
 	private ArrayList<Note> _noteList;
 
 	private boolean _created;
-	private String _passphrase;
 
 	private ListView _listView;
 	private ProgressBar _progressBar;
@@ -61,9 +60,10 @@ public class ActivityNotes extends Activity {
 			ToastView.error(_context, "Failed to read passphrase!", Toast.LENGTH_LONG).show();
 			finish();
 		}
-		_passphrase = passphrase;
 
-		_databaseController = new DatabaseController(_context);
+		_databaseController = DatabaseController.getInstance();
+		_databaseController.Initialize(_context, passphrase);
+
 		_navigationController = new NavigationController(_context);
 
 		_listView = (ListView) findViewById(R.id.listView);
@@ -92,22 +92,31 @@ public class ActivityNotes extends Activity {
 		_created = true;
 	}
 
+	@Override
+	protected void onPause() {
+		super.onPause();
+		_logger.Debug("onPause");
+	}
+
+	@Override
 	protected void onResume() {
 		super.onResume();
 		_logger.Debug("onResume");
 
 		if (_created) {
-			if (_passphrase == null) {
-				ToastView.error(_context, "Failed to read passphrase!", Toast.LENGTH_LONG).show();
-				finish();
-			}
-
-			_noteList = _databaseController.GetNotes(_passphrase);
+			_noteList = _databaseController.GetNotes();
 
 			_listView.setAdapter(new NoteListAdapter(_context, _noteList));
 
 			_progressBar.setVisibility(View.GONE);
 			_listView.setVisibility(View.VISIBLE);
 		}
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		_logger.Debug("onDestroy");
+		_databaseController.Dispose();
 	}
 }

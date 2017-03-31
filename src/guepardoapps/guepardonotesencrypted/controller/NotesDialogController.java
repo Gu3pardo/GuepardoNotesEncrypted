@@ -16,16 +16,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import guepardoapps.guepardonotesencrypted.R;
+import guepardoapps.guepardonotesencrypted.common.Enables;
 import guepardoapps.guepardonotesencrypted.common.SharedPrefConstants;
 import guepardoapps.guepardonotesencrypted.helper.PasswordStrengthHelper;
 import guepardoapps.guepardonotesencrypted.model.Note;
 
 import guepardoapps.library.toastview.ToastView;
-
-import guepardoapps.toolset.controller.DialogController;
-import guepardoapps.toolset.controller.SharedPrefController;
+import guepardoapps.library.toolset.common.Logger;
+import guepardoapps.library.toolset.controller.DialogController;
+import guepardoapps.library.toolset.controller.SharedPrefController;
 
 public class NotesDialogController extends DialogController {
+
+	private static final String TAG = NotesDialogController.class.getSimpleName();
 
 	private boolean _isPasswordLongEnough = false;
 	private boolean _isPasswordValid = false;
@@ -37,8 +40,12 @@ public class NotesDialogController extends DialogController {
 	public NotesDialogController(Context context) {
 		super(context, ContextCompat.getColor(context, R.color.TextIcon),
 				ContextCompat.getColor(context, R.color.Primary));
+		_logger = new Logger(TAG, Enables.DEBUGGING);
+		_logger.Debug(TAG + " created...");
+
 		_context = context;
-		_databaseController = new DatabaseController(_context);
+
+		_databaseController = DatabaseController.getInstance();
 		_sharedPrefController = new SharedPrefController(_context, SharedPrefConstants.SHARED_PREF_NAME);
 	}
 
@@ -142,8 +149,10 @@ public class NotesDialogController extends DialogController {
 
 				String password = passwordInput.getText().toString();
 
-				_databaseController.SaveNote(password, new Note(0, "Title",
+				_databaseController.Initialize(_context, password);
+				_databaseController.SaveNote(new Note(0, "Title",
 						String.format(_context.getResources().getString(R.string.example)), 0, 0, 0));
+
 				_sharedPrefController.SaveBooleanValue(SharedPrefConstants.SHARED_PREF_NAME, true);
 
 				if (runnable != null) {
@@ -174,7 +183,7 @@ public class NotesDialogController extends DialogController {
 					return;
 				}
 
-				if (_databaseController.GetNotes(password) == null) {
+				if (_databaseController.GetNotes() == null) {
 					ToastView.error(_context, "Login failed!", Toast.LENGTH_LONG).show();
 					return;
 				}
@@ -188,6 +197,19 @@ public class NotesDialogController extends DialogController {
 		});
 
 		displayNewDialog(false);
+	}
+
+	public void Dispose() {
+		_logger.Debug("Dispose");
+		_databaseController.Dispose();
+
+		CloseDialogCallback.run();
+
+		_logger = null;
+
+		_context = null;
+		_databaseController = null;
+		_sharedPrefController = null;
 	}
 
 	private void createNewDialog(int windowFeature, int layoutId) {
