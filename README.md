@@ -1,6 +1,3 @@
-# GuepardoNotesEncrypted
-Android application for creating notes and saving them to an encrypted database
-
 # MyNoteEncrypted
 
 [![Platform](https://img.shields.io/badge/platform-Android-blue.svg)](https://www.android.com)
