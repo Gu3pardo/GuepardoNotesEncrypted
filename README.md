@@ -95,11 +95,17 @@ public boolean Initialize(@NonNull Context context, @NonNull String passphrase) 
 
 ```
 
+### Caution
+
+Currently it is not possible to change the passphrase once it is set! You have to reset the applications data, but all notes will be lost!
+Also you have only FIVE tries to login. Otherwise everything will be deleted!
+
 # Troubleshooting
 
 I tried to test this application using the android studio emulator on Windows 10. This is due to x86 not working...
 Use your android smartphone!
 
 Further helpful links:
-https://discuss.zetetic.net/t/sqlcipher-integration-problem/1487
-https://stackoverflow.com/questions/40674016/android-app-crashes-with-unsatisfiedlinkerror-when-using-sqlcipher-and-crashlyti
+
+ - https://discuss.zetetic.net/t/sqlcipher-integration-problem/1487
+ - https://stackoverflow.com/questions/40674016/android-app-crashes-with-unsatisfiedlinkerror-when-using-sqlcipher-and-crashlyti
