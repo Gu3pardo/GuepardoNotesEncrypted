@@ -1,0 +1,28 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="guepardoapps.mynoteencrypted">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name="guepardoapps.mynoteencrypted.activities.ActivityAdd" />
+        <activity android:name="guepardoapps.mynoteencrypted.activities.ActivityDetails" />
+        <activity android:name="guepardoapps.mynoteencrypted.activities.ActivityImpressum" />
+        <activity
+            android:name="guepardoapps.mynoteencrypted.activities.ActivityLogin"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="guepardoapps.mynoteencrypted.activities.ActivityNotes" />
+    </application>
+
+</manifest>

@@ -1,0 +1,53 @@
+<resources>
+    <string name="app_name">MyNote Encrypted</string>
+
+    <string name="create">Create</string>
+    <string name="edit"> Edit </string>
+    <string name="delete">Delete</string>
+    <string name="send">Send</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="back">Back</string>
+    <string name="addPlus">+</string>
+
+    <string name="notes">Notes</string>
+    <string name="title">Title</string>
+    <string name="content">Content</string>
+    <string name="new_note">New note</string>
+
+    <string name="prompt">Prompt</string>
+    <string name="ok">OK</string>
+    <string name="neutral">Neutral</string>
+
+    <string name="hint">Enter your notes, please!</string>
+    <string name="hint_add_title">Title of your note</string>
+    <string name="hint_add_content">Add your note here</string>
+
+    <string name="short_example">Example</string>
+    <string name="example">This is an example for a long and multiline sentence in this application.</string>
+
+    <string name="contentDescription">This is a image</string>
+
+    <string name="about">About</string>
+    <string name="author">Jonas Schubert\nGuepardoApps</string>
+    <string name="email">E-Mail: guepardoapps@gmail.com</string>
+    <string name="gitHubLink">https://github.com/GuepardoApps/MyNoteEncrypted/</string>
+    <string name="payPalLink">https://www.paypal.me/GuepardoApps/</string>
+
+    <string name="login">Login</string>
+    <string name="enterPasswordHint">Enter your password</string>
+    <string name="firstLogin">First Login! Enter a password</string>
+    <string name="passwordSelectionHint">Use at least one number, one lower char, one upper char and a sign! Length has to be between 8 and 16 signs! Remember your phrase! It cannot be changed later!</string>
+    <string name="reenterPasswordHint">Reenter your password</string>
+
+    <string name="match">Match!</string>
+    <string name="noMatch">No match!</string>
+
+    <string name="weak">Weak</string>
+    <string name="valid">Valid!</string>
+    <string name="notValid">Not valid!</string>
+
+    <string name="wrongLength">Wrong length!</string>
+    <string name="tooLong">Too long!</string>
+    <string name="tooShort">Too short!</string>
+</resources>
