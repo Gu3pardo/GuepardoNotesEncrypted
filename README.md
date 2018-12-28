@@ -1,23 +1,23 @@
-# MyNoteEncrypted
+# MyNoteEncrypted - master branch
 
 [![Platform](https://img.shields.io/badge/platform-Android-blue.svg)](https://www.android.com)
 <a target="_blank" href="https://android-arsenal.com/api?level=21" title="API21+"><img src="https://img.shields.io/badge/API-21+-blue.svg" /></a>
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 <a target="_blank" href="https://www.paypal.me/GuepardoApps" title="Donate using PayPal"><img src="https://img.shields.io/badge/paypal-donate-blue.svg" /></a>
 
-[![Build](https://img.shields.io/badge/build-passing-green.svg)](https://github.com/GuepardoApps/MyNoteEncrypted/tree/master/release)
-[![Version](https://img.shields.io/badge/version-v1.0.0.170902-blue.svg)](https://github.com/GuepardoApps/MyNoteEncrypted/tree/master/release/v1.0.0.170902.apk)
+[![Build](https://img.shields.io/badge/build-passing-green.svg)](https://github.com/GuepardoApps-Releases/MyNoteEncrypted/tree/master/release)
+[![Version](https://img.shields.io/badge/version-v1.0.0.170902-blue.svg)](https://github.com/GuepardoApps-Releases/MyNoteEncrypted/tree/master/release/v1.0.0.170902.apk)
 
 Android application for creating notes and saving them to an encrypted database using the library sqlcipher.
 
-# Screenshots
+## Screenshots
 
-![alt tag](https://github.com/GuepardoApps/MyNoteEncrypted/blob/master/screenshots/header_001.png)
+![alt tag](https://github.com/GuepardoApps-Releases/MyNoteEncrypted/blob/master/screenshots/header_001.png)
 ___________________________________
 
-![alt tag](https://github.com/GuepardoApps/MyNoteEncrypted/blob/master/screenshots/header_002.png)
+![alt tag](https://github.com/GuepardoApps-Releases/MyNoteEncrypted/blob/master/screenshots/header_002.png)
 
-# SQL Cipher integration
+## SQL Cipher integration
 
 add following line to your dependencies
 
@@ -106,3 +106,7 @@ Further helpful links:
 
  - https://discuss.zetetic.net/t/sqlcipher-integration-problem/1487
  - https://stackoverflow.com/questions/40674016/android-app-crashes-with-unsatisfiedlinkerror-when-using-sqlcipher-and-crashlyti
+
+## License
+
+MyNoteEncrypted is distributed under the MIT license. [See LICENSE](LICENSE.md) for details.
