@@ -5,17 +5,17 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 <a target="_blank" href="https://www.paypal.me/GuepardoApps" title="Donate using PayPal"><img src="https://img.shields.io/badge/paypal-donate-blue.svg" /></a>
 
-[![Build](https://img.shields.io/badge/build-passing-green.svg)](https://github.com/GuepardoApps-Releases/MyNoteEncrypted/tree/develop/release)
-[![Version](https://img.shields.io/badge/version-v1.0.0.170902-blue.svg)](https://github.com/GuepardoApps-Releases/MyNoteEncrypted/tree/develop/release/v1.0.0.170902.apk)
+[![Build](https://img.shields.io/badge/build-passing-green.svg)](release)
+[![Version](https://img.shields.io/badge/version-v1.0.0.170902-blue.svg)](release/v1.0.0.170902.apk)
 
 Android application for creating notes and saving them to an encrypted database using the library sqlcipher.
 
 ## Screenshots
 
-![alt tag](https://github.com/GuepardoApps-Releases/MyNoteEncrypted/blob/develop/screenshots/header_001.png)
+![alt tag](screenshots/header_001.png)
 ___________________________________
 
-![alt tag](https://github.com/GuepardoApps-Releases/MyNoteEncrypted/blob/develop/screenshots/header_002.png)
+![alt tag](screenshots/header_002.png)
 
 ## SQL Cipher integration
 
@@ -104,8 +104,8 @@ Use your android smartphone!
 
 Further helpful links:
 
- - https://discuss.zetetic.net/t/sqlcipher-integration-problem/1487
- - https://stackoverflow.com/questions/40674016/android-app-crashes-with-unsatisfiedlinkerror-when-using-sqlcipher-and-crashlyti
+- https://discuss.zetetic.net/t/sqlcipher-integration-problem/1487
+- https://stackoverflow.com/questions/40674016/android-app-crashes-with-unsatisfiedlinkerror-when-using-sqlcipher-and-crashlyti
 
 ## License
 
