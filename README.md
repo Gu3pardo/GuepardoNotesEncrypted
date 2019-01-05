@@ -1,4 +1,4 @@
-# MyNoteEncrypted - develop branch
+# MyNoteEncrypted - master branch
 
 [![Platform](https://img.shields.io/badge/platform-Android-blue.svg)](https://www.android.com)
 <a target="_blank" href="https://android-arsenal.com/api?level=21" title="API21+"><img src="https://img.shields.io/badge/API-21+-blue.svg" /></a>
