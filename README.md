@@ -1,12 +1,15 @@
-# MyNoteEncrypted - master branch
+# MyNoteEncrypted
+
+[![PlayStore](https://img.shields.io/badge/PlayStore-MyNoteEncrypted-blue.svg)](https://play.google.com/store/apps/details?id=guepardoapps.mynoteencrypted)
+[![Paypal](https://img.shields.io/badge/paypal-donate-blue.svg)](https://www.paypal.me/GuepardoApps)
+
+[![Build](https://img.shields.io/badge/build-success-green.svg)](./releases)
+[![Version](https://img.shields.io/badge/version-1.2.0.190525-blue.svg)](./releases)
+[![API](https://img.shields.io/badge/API-26+-blue.svg)](https://android-arsenal.com/api?level=26)
 
 [![Platform](https://img.shields.io/badge/platform-Android-blue.svg)](https://www.android.com)
-<a target="_blank" href="https://android-arsenal.com/api?level=21" title="API21+"><img src="https://img.shields.io/badge/API-21+-blue.svg" /></a>
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-<a target="_blank" href="https://www.paypal.me/GuepardoApps" title="Donate using PayPal"><img src="https://img.shields.io/badge/paypal-donate-blue.svg" /></a>
-
-[![Build](https://img.shields.io/badge/build-passing-green.svg)](release)
-[![Version](https://img.shields.io/badge/version-v1.0.0.170902-blue.svg)](release/v1.0.0.170902.apk)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
 
 Android application for creating notes and saving them to an encrypted database using the library sqlcipher.
 
@@ -21,83 +24,59 @@ ___________________________________
 
 add following line to your dependencies
 
-```java
-    compile 'net.zetetic:android-database-sqlcipher:3.5.1@aar'
+```kotlin
+    implementation 'net.zetetic:android-database-sqlcipher:3.5.1@aar'
 ```
 
 replace following snippets in your database class
 
-```java
-import android.database.Cursor;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+```kotlin
+import android.database.SQLiteDatabase
+import android.database.SQLiteOpenHelper
 ```
 
 with following snippets
 
-```java
-import net.sqlcipher.Cursor;
-import net.sqlcipher.SQLException;
-import net.sqlcipher.database.SQLiteDatabase;
-import net.sqlcipher.database.SQLiteOpenHelper;
+```kotlin
+import net.sqlcipher.database.SQLiteDatabase
+import net.sqlcipher.database.SQLiteOpenHelper
 ```
 
-to use your database open it with following method providing a passphrase for encryption and decryption
-
-```java
-
-// More code above
-
-public Database Open(@NonNull String passphrase) throws SQLException {
-	_databaseHelper = new DatabaseHelper(_context);
-	_database = _databaseHelper.getWritableDatabase(passphrase);
-	return this;
-}
-
-// More code below
-
-```
-
-### Important
+## Important
 
 Above is only possible if you load the libs. the earlier in your application the better.
 I use a class DatabaseController to handle  all action for the database and I call the necessary method in an initalize method
 
-```java
+```kotlin
 
 // More code above
 
-public boolean Initialize(@NonNull Context context, @NonNull String passphrase) {
-	if (_initialized) {
-		return false;
-	}
+fun initialize(context: Context, passphrase: String): Boolean {
+       if (initialized) {
+           return false
+       }
 
-	_context = context;
-	SQLiteDatabase.loadLibs(_context);		// This is the important line!
-	_database = new Database(_context);
+       SQLiteDatabase.loadLibs(context)
 
-	try {
-		_database.Open(passphrase);			// Try and catch also checks if the passphrase is valid!
-	} catch (SQLException sqlException) {
-		return false;
-	}
+       try {
+           dbNote = DbNote(context, passphrase)
+       } catch (sqlException: SQLException) {
+           return false
+       }
 
-	_initialized = true;
-
-	return true;
-}
+       return true
+   }
 
 // More code below
 
 ```
 
-### Caution
+## Caution
 
 Currently it is not possible to change the passphrase once it is set! You have to reset the applications data, but all notes will be lost!
 Also you have only FIVE tries to login. Otherwise everything will be deleted!
 
-# Troubleshooting
+## Troubleshooting
 
 I tried to test this application using the android studio emulator on Windows 10. This is due to x86 not working...
 Use your android smartphone!
@@ -110,3 +89,27 @@ Further helpful links:
 ## License
 
 MyNoteEncrypted is distributed under the MIT license. [See LICENSE](LICENSE.md) for details.
+
+```
+MIT License
+
+Copyright (c) 2017 - 2019 GuepardoApps (Jonas Schubert)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
