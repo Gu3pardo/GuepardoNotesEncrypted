@@ -1,0 +1,86 @@
+<resources>
+    <string name="app_name">MyNoteEncrypted</string>
+    <string name="copyright">©2017 &#8211; 2019 GuepardoApps (Jonas Schubert)</string>
+
+    <string name="create">Erstelle</string>
+    <string name="edit">Bearbeite</string>
+    <string name="delete">Löschen</string>
+    <string name="send">Senden</string>
+    <string name="save">Speichern</string>
+    <string name="add">Hinzufügen</string>
+    <string name="addPlus">+</string>
+    <string name="back">Zurück</string>
+    <string name="set_bubble_state">Aktiviere floating Benachrichtigung</string>
+    <string name="settings">Einstellungen</string>
+
+    <string name="notes">Notizen</string>
+    <string name="title">Titel</string>
+    <string name="content">Inhalt</string>
+    <string name="new_note">Neue Notiz</string>
+
+    <string name="prompt">Aufforderung</string>
+    <string name="ok">Ok</string>
+    <string name="neutral">Neutral</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="retry">Wiederholen</string>
+    <string name="saved">Gespeichert</string>
+
+    <string name="yes">Ja</string>
+    <string name="no">Nein</string>
+
+    <string name="hint">Bitte Notizen eingeben!</string>
+    <string name="hint_add_title">Notizentitel</string>
+    <string name="hint_add_content">Inhalt hier einfügen</string>
+
+    <string name="missingTitle">Bitte Titel eingeben</string>
+    <string name="missingNote">Bitte Notiz eingeben</string>
+
+    <string name="unsavedChangesWarning">Warnung! Die erstellte Notiz ist nicht gespeichert! Möchtest du sie speichern?</string>
+    <string name="saveFailedToasty">Speichern fehlgeschlagen</string>
+    <string name="saveFailedDialog">Warnung! Speichern fehlgeschlagen! Wiederholen oder abbrechen?</string>
+    <string name="updateFailedToasty">Aktualisierung fehlgeschlagen</string>
+    <string name="deleteFailedToasty">Löschen fehlgeschlagen</string>
+
+    <string name="short_example">Beispiel</string>
+    <string name="example">Dies ist ein Beispiel für eine lange und mehrzahlige Notiz in dieser Anwendung.</string>
+
+    <string name="login">Login</string>
+    <string name="enterPasswordHint">Bitte Passwort eingeben</string>
+    <string name="firstLogin">Erster Login! Bitte Passwort erstellen</string>
+    <string name="passwordSelectionHint">Mindestens eine Zahl, einen kleinen und großen Buchstaben sowie ein Zeichen verwenden! Es muss zwischen 8 und 64 Zeichen lang sein! Merke dir das Password, da es später nicht geändert werden kann!</string>
+    <string name="reenterPasswordHint">Bitte Passwort erneut eingeben</string>
+
+    <string name="passwordsNotMatch">Passwörter stimmen nicht überein!</string>
+    <string name="passwordNotValid">Passwort ist nicht valide!</string>
+    <string name="invalidPwDbDeleteWarning">Achtung! Du hast nur noch %d Versuche! Danach werden deine Daten gelöscht!</string>
+    <string name="invalidPwDbDeleteHint">Du hast %d Mal invalide Daten eingegeben! Deine Daten wurden gelöscht!</string>
+
+    <string name="match">Match!</string>
+    <string name="noMatch">Kein match!</string>
+
+    <string name="weak">Schwach</string>
+    <string name="valid">Valide!</string>
+    <string name="notValid">Nicht valide!</string>
+
+    <string name="wrongLength">Falsche Länge!</string>
+    <string name="tooLong">Zu lang!</string>
+    <string name="tooShort">Zu kurz!</string>
+
+    <string name="contentDescription">Dies ist ein Bild</string>
+
+    <string name="about">Über</string>
+    <string name="author_title">Autor</string>
+    <string name="author">Jonas Schubert\nGuepardoApps</string>
+    <string name="version_title">Version</string>
+    <string name="version">1.2.0.190525</string>
+    <string name="email_title">E-Mail</string>
+    <string name="email">guepardoapps@gmail.com</string>
+    <string name="gitHubLink_title">GitHub</string>
+    <string name="gitHubLink">https://github.com/GuepardoApps-Releases/MyNoteEncrypted/</string>
+    <string name="homepageLink_title">Homepage</string>
+    <string name="homepageLink">https://guepardoapps.github.io/</string>
+
+    <string name="deleteRequest">Möchtest du die Notiz %s löschen?</string>
+
+    <string name="unknownError">Etwas ist schief gelaufen!</string>
+</resources>

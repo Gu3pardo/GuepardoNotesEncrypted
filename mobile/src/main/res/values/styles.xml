@@ -8,6 +8,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.MaterialAboutActivity" parent="Theme.Mal.Light">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
     <style name="SimpleDialog" parent="Material.App.Dialog.Simple">
         <item name="di_inAnimation">@anim/anim_scale_in</item>
         <item name="di_outAnimation">@anim/anim_scale_out</item>
@@ -17,5 +23,4 @@
         <item name="di_inAnimation">@anim/anim_scale_in</item>
         <item name="di_outAnimation">@anim/anim_scale_out</item>
     </style>
-
 </resources>

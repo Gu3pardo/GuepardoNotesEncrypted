@@ -1,0 +1,9 @@
+<resources>
+    <string name="sharedPrefName">MyNoteEncryptedSharedPref</string>
+    <string name="sharedPrefKey">dI8(322d</string>
+
+    <string name="sharedPrefEnteredPassword">EnteredPassword</string>
+    <string name="sharedPrefInvalidEnteredCount">InvalidEnteredCount</string>
+
+    <string name="bundleDataId">id</string>
+</resources>
