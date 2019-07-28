@@ -17,7 +17,7 @@ internal class DbLogging(context: Context)
         val createTable = (
                 "CREATE TABLE IF NOT EXISTS $DatabaseTable"
                         + "("
-                        + "$ColumnId INTEGER PRIMARY KEY autoincrement,"
+                        + "$ColumnId TEXT PRIMARY KEY,"
                         + "$ColumnDateTime INTEGER,"
                         + "$ColumnSeverity  INTEGER,"
                         + "$ColumnTag  TEXT,"
@@ -26,31 +26,29 @@ internal class DbLogging(context: Context)
         database.execSQL(createTable)
     }
 
+    override fun onDowngrade(database: SQLiteDatabase, oldVersion: Int, newVersion: Int) = onUpgrade(database, oldVersion, newVersion)
+
     override fun onUpgrade(database: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         database.execSQL("DROP TABLE IF EXISTS $DatabaseTable")
         onCreate(database)
     }
 
-    override fun onDowngrade(database: SQLiteDatabase, oldVersion: Int, newVersion: Int) = onUpgrade(database, oldVersion, newVersion)
-
-    fun addLog(dbLog: DbLog): Long {
-        val values = ContentValues().apply {
-            put(ColumnDateTime, dbLog.dateTime.toString())
-            put(ColumnSeverity, dbLog.severity.ordinal.toString())
-            put(ColumnTag, dbLog.tag)
-            put(ColumnDescription, dbLog.description)
-        }
-
-        val database = this.writableDatabase
-        return database.insert(DatabaseTable, null, values)
-    }
+    fun addLog(dbLog: DbLog): Long = this.writableDatabase
+            .insert(DatabaseTable, null, ContentValues()
+                    .apply {
+                        put(ColumnId, dbLog.id)
+                        put(ColumnDateTime, dbLog.dateTime.toString())
+                        put(ColumnSeverity, dbLog.severity.ordinal.toString())
+                        put(ColumnTag, dbLog.tag)
+                        put(ColumnDescription, dbLog.description)
+                    })
 
     companion object {
         private const val DatabaseVersion = 1
-        private const val DatabaseName = "guepardoapps-mynote-logging.db"
+        private const val DatabaseName = "guepardoapps-mynote-logging-2.db"
         private const val DatabaseTable = "loggingTable"
 
-        private const val ColumnId = "_id"
+        private const val ColumnId = "id"
         private const val ColumnDateTime = "dateTime"
         private const val ColumnSeverity = "severity"
         private const val ColumnTag = "tag"

@@ -4,7 +4,7 @@
 [![Paypal](https://img.shields.io/badge/paypal-donate-blue.svg)](https://www.paypal.me/GuepardoApps)
 
 [![Build](https://img.shields.io/badge/build-success-green.svg)](./releases)
-[![Version](https://img.shields.io/badge/version-1.2.0.190525-blue.svg)](./releases)
+[![Version](https://img.shields.io/badge/version-2.0.0.190728-blue.svg)](./releases)
 [![API](https://img.shields.io/badge/API-26+-blue.svg)](https://android-arsenal.com/api?level=26)
 
 [![Platform](https://img.shields.io/badge/platform-Android-blue.svg)](https://www.android.com)
@@ -25,7 +25,7 @@ ___________________________________
 add following line to your dependencies
 
 ```kotlin
-    implementation 'net.zetetic:android-database-sqlcipher:3.5.1@aar'
+    implementation 'net.zetetic:android-database-sqlcipher:3.5.9@aar'
 ```
 
 replace following snippets in your database class
@@ -58,13 +58,12 @@ fun initialize(context: Context, passphrase: String): Boolean {
 
        SQLiteDatabase.loadLibs(context)
 
-       try {
+       return try {
            dbNote = DbNote(context, passphrase)
+		   true
        } catch (sqlException: SQLException) {
-           return false
+           false
        }
-
-       return true
    }
 
 // More code below

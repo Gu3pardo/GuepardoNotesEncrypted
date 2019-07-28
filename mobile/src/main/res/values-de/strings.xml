@@ -1,7 +1,4 @@
 <resources>
-    <string name="app_name">MyNoteEncrypted</string>
-    <string name="copyright">©2017 &#8211; 2019 GuepardoApps (Jonas Schubert)</string>
-
     <string name="create">Erstelle</string>
     <string name="edit">Bearbeite</string>
     <string name="delete">Löschen</string>
@@ -70,15 +67,10 @@
 
     <string name="about">Über</string>
     <string name="author_title">Autor</string>
-    <string name="author">Jonas Schubert\nGuepardoApps</string>
     <string name="version_title">Version</string>
-    <string name="version">1.2.0.190525</string>
     <string name="email_title">E-Mail</string>
-    <string name="email">guepardoapps@gmail.com</string>
     <string name="gitHubLink_title">GitHub</string>
-    <string name="gitHubLink">https://github.com/GuepardoApps-Releases/MyNoteEncrypted/</string>
     <string name="homepageLink_title">Homepage</string>
-    <string name="homepageLink">https://guepardoapps.github.io/</string>
 
     <string name="deleteRequest">Möchtest du die Notiz %s löschen?</string>
 

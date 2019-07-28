@@ -18,7 +18,7 @@ internal class DbNote(context: Context, private val password: String)
         val createTable = (
                 "CREATE TABLE IF NOT EXISTS $DatabaseTable"
                         + "("
-                        + "$ColumnId INTEGER PRIMARY KEY autoincrement,"
+                        + "$ColumnId TEXT PRIMARY KEY,"
                         + "$ColumnTitle TEXT NOT NULL,"
                         + "$ColumnContent TEXT NOT NULL,"
                         + "$ColumnYear  INTEGER,"
@@ -36,37 +36,21 @@ internal class DbNote(context: Context, private val password: String)
         onCreate(database)
     }
 
-    fun add(note: Note): Long {
-        val values = ContentValues().apply {
-            put(ColumnTitle, note.title)
-            put(ColumnContent, note.content)
-            put(ColumnYear, note.year)
-            put(ColumnMonth, note.month)
-            put(ColumnDay, note.day)
-            put(ColumnHour, note.hour)
-            put(ColumnMinute, note.minute)
-            put(ColumnSecond, note.second)
-        }
+    fun add(note: Note): Long = this.getWritableDatabase(password)
+            .insert(DatabaseTable, null, ContentValues()
+                    .apply {
+                        put(ColumnId, note.id)
+                        put(ColumnTitle, note.title)
+                        put(ColumnContent, note.content)
+                        put(ColumnYear, note.year)
+                        put(ColumnMonth, note.month)
+                        put(ColumnDay, note.day)
+                        put(ColumnHour, note.hour)
+                        put(ColumnMinute, note.minute)
+                        put(ColumnSecond, note.second)
+                    })
 
-        return this.getWritableDatabase(password).insert(DatabaseTable, null, values)
-    }
-
-    fun update(note: Note): Int {
-        val values = ContentValues().apply {
-            put(ColumnTitle, note.title)
-            put(ColumnContent, note.content)
-            put(ColumnYear, note.year)
-            put(ColumnMonth, note.month)
-            put(ColumnDay, note.day)
-            put(ColumnHour, note.hour)
-            put(ColumnMinute, note.minute)
-            put(ColumnSecond, note.second)
-        }
-
-        return this.getWritableDatabase(password).update(DatabaseTable, values, "$ColumnId LIKE ?", arrayOf(note.id.toString()))
-    }
-
-    fun delete(id: Int): Int = this.getWritableDatabase(password).delete(DatabaseTable, "$ColumnId LIKE ?", arrayOf(id.toString()))
+    fun delete(id: String): Int = this.getWritableDatabase(password).delete(DatabaseTable, "$ColumnId LIKE ?", arrayOf(id))
 
     fun get(): MutableList<Note> {
         val cursor = this.getReadableDatabase(password).query(
@@ -76,7 +60,7 @@ internal class DbNote(context: Context, private val password: String)
         val list = mutableListOf<Note>()
         with(cursor) {
             while (moveToNext()) {
-                val id = getLong(getColumnIndexOrThrow(ColumnId))
+                val id = getString(getColumnIndexOrThrow(ColumnId))
 
                 val title = getString(getColumnIndexOrThrow(ColumnTitle))
                 val content = getString(getColumnIndexOrThrow(ColumnContent))
@@ -96,9 +80,22 @@ internal class DbNote(context: Context, private val password: String)
         return list
     }
 
+    fun update(note: Note): Int = this.getWritableDatabase(password)
+            .update(DatabaseTable, ContentValues()
+                    .apply {
+                        put(ColumnTitle, note.title)
+                        put(ColumnContent, note.content)
+                        put(ColumnYear, note.year)
+                        put(ColumnMonth, note.month)
+                        put(ColumnDay, note.day)
+                        put(ColumnHour, note.hour)
+                        put(ColumnMinute, note.minute)
+                        put(ColumnSecond, note.second)
+                    }, "$ColumnId LIKE ?", arrayOf(note.id))
+
     companion object {
-        private const val DatabaseVersion = 2
-        private const val DatabaseName = "guepardoapps-mynoteencrypted-note.db"
+        private const val DatabaseVersion = 1
+        private const val DatabaseName = "guepardoapps-mynoteencrypted-note-2.db"
         private const val DatabaseTable = "encryptedNoteTable"
 
         private const val ColumnId = "_id"

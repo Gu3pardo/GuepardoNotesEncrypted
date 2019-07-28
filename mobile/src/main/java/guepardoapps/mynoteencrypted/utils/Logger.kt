@@ -3,6 +3,7 @@ package guepardoapps.mynoteencrypted.utils
 import android.content.Context
 import androidx.annotation.NonNull
 import android.util.Log
+import com.github.guepardoapps.kulid.ULID
 import guepardoapps.mynoteencrypted.database.logging.DbLogging
 import guepardoapps.mynoteencrypted.database.logging.DbLog
 import guepardoapps.mynoteencrypted.database.logging.Severity
@@ -29,24 +30,10 @@ internal class Logger private constructor() {
         dbHandler = DbLogging(context)
     }
 
-    fun <T> verbose(@NonNull tag: String, @NonNull description: T) {
-        if (dbHandler != null && loggingEnabled) {
-            Log.v(tag, description.toString())
-            tryToWriteToDatabase(tag, description, Severity.Verbose)
-        }
-    }
-
     fun <T> debug(@NonNull tag: String, @NonNull description: T) {
         if (dbHandler != null && loggingEnabled) {
             Log.d(tag, description.toString())
             tryToWriteToDatabase(tag, description, Severity.Debug)
-        }
-    }
-
-    fun <T> info(@NonNull tag: String, @NonNull description: T) {
-        if (dbHandler != null && loggingEnabled) {
-            Log.i(tag, description.toString())
-            tryToWriteToDatabase(tag, description, Severity.Info)
         }
     }
 
@@ -67,7 +54,7 @@ internal class Logger private constructor() {
     private fun <T> tryToWriteToDatabase(@NonNull tag: String, @NonNull description: T, severity: Severity) {
         if (dbHandler != null && writeToDatabaseEnabled) {
             dbHandler?.addLog(
-                    DbLog(-1,
+                    DbLog(ULID.random(),
                             Date(Calendar.getInstance().timeInMillis),
                             severity,
                             tag,

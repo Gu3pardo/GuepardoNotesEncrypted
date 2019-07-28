@@ -7,6 +7,7 @@ import android.view.KeyEvent
 import android.widget.EditText
 import android.widget.Scroller
 import android.widget.Toast
+import com.github.guepardoapps.kulid.ULID
 import com.rey.material.widget.FloatingActionButton
 import es.dmoral.toasty.Toasty
 import guepardoapps.mynoteencrypted.R
@@ -17,16 +18,15 @@ import guepardoapps.mynoteencrypted.model.Note
 
 class ActivityAdd : Activity() {
 
-    private lateinit var dialogController: IDialogController
+    private val dialogController: IDialogController = DialogController(this)
+
+    private lateinit var editContent: EditText
 
     private lateinit var editTitle: EditText
-    private lateinit var editContent: EditText
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.side_add)
-
-        dialogController = DialogController(this)
 
         editTitle = findViewById(R.id.addTitle)
         editContent = findViewById(R.id.addContent)
@@ -62,7 +62,7 @@ class ActivityAdd : Activity() {
             return
         }
 
-        if (DatabaseController.instance.add(Note(id = -1, title = editTitle.text.toString(), content = editContent.text.toString())) == 0L) {
+        if (DatabaseController.instance.add(Note(id = ULID.random(), title = editTitle.text.toString(), content = editContent.text.toString())) == 0L) {
             Toasty.error(this, getString(R.string.saveFailedToasty), Toast.LENGTH_LONG).show()
             dialogController.createDialog(getString(R.string.saveFailedDialog), getString(R.string.retry), this::saveNote, getString(R.string.cancel), this::finish)
         } else {

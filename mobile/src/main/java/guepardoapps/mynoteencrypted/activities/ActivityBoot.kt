@@ -15,6 +15,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import com.github.guepardoapps.kulid.ULID
 import com.rey.material.widget.Button
 import es.dmoral.toasty.Toasty
 import guepardoapps.mynoteencrypted.R
@@ -29,15 +30,17 @@ import java.util.Locale
 @ExperimentalUnsignedTypes
 class ActivityBoot : Activity() {
 
-    private var databaseController: DatabaseController = DatabaseController.instance
-    private var navigationController: NavigationController = NavigationController(this)
-    private var sharedPreferenceController: SharedPreferenceController = SharedPreferenceController(this)
+    private val databaseController: DatabaseController = DatabaseController.instance
 
-    private lateinit var passphraseInput: EditText
-    private var invalidInputCount = sharedPreferenceController.load(getString(R.string.sharedPrefInvalidEnteredCount), 0)
+    private val sharedPreferenceController: SharedPreferenceController = SharedPreferenceController(this)
 
     private var doPasswordsMatch: Boolean = false
+
+    private var invalidInputCount: Int = sharedPreferenceController.load(getString(R.string.sharedPrefInvalidEnteredCount), 0)
+
     private var isPasswordValid: Boolean = false
+
+    private lateinit var passphraseInput: EditText
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +55,7 @@ class ActivityBoot : Activity() {
         findViewById<Button>(R.id.loginButton).setOnClickListener {
             if (passphraseInput.text.toString().length in MinPasswordLength..MaxPasswordLength) {
                 if (databaseController.initialize(applicationContext, passphraseInput.text.toString())) {
-                    navigationController.navigate(ActivityMain::class.java, true)
+                    NavigationController(this).navigate(ActivityMain::class.java, true)
                 } else {
                     loginError()
                 }
@@ -178,7 +181,7 @@ class ActivityBoot : Activity() {
 
             if (databaseController.initialize(this, passwordInput.text.toString())) {
                 sharedPreferenceController.save(getString(R.string.sharedPrefEnteredPassword), true)
-                databaseController.add(Note(id = 0, title = getString(R.string.title), content = resources.getString(R.string.example)))
+                databaseController.add(Note(id = ULID.random(), title = getString(R.string.title), content = resources.getString(R.string.example)))
                 Toasty.success(this, getString(R.string.saved), Toast.LENGTH_LONG).show()
                 dialog.dismiss()
             } else {

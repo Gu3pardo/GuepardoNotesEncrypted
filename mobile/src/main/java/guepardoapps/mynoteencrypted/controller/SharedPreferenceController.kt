@@ -6,9 +6,14 @@ import guepardoapps.mynoteencrypted.R
 import guepardoapps.mynoteencrypted.utils.Logger
 
 internal class SharedPreferenceController(context: Context) : ISharedPreferenceController {
-    private val tag: String = SharedPreferenceController::class.java.simpleName
 
     private val cryptoPrefs: CryptoPrefs = CryptoPrefs(context, context.getString(R.string.sharedPrefName), context.getString(R.string.sharedPrefKey))
+
+    override fun erase() = cryptoPrefs.erase()
+
+    override fun <T : Any> load(key: String, defaultValue: T): T = cryptoPrefs.get(key, defaultValue)
+
+    override fun remove(key: String) = cryptoPrefs.remove(key)
 
     @ExperimentalUnsignedTypes
     override fun <T : Any> save(key: String, value: T) {
@@ -26,14 +31,8 @@ internal class SharedPreferenceController(context: Context) : ISharedPreferenceC
             UShort::class -> cryptoPrefs.put(key, value as UShort)
             String::class -> cryptoPrefs.put(key, value as String)
             else -> {
-                Logger.instance.error(tag, "Invalid generic type of $value")
+                Logger.instance.error(SharedPreferenceController::class.java.simpleName, "Invalid generic type of $value")
             }
         }
     }
-
-    override fun <T : Any> load(key: String, defaultValue: T): T = cryptoPrefs.get(key, defaultValue)
-
-    override fun remove(key: String) = cryptoPrefs.remove(key)
-
-    override fun erase() = cryptoPrefs.erase()
 }

@@ -11,7 +11,7 @@ internal interface IDatabaseController {
 
     fun update(note: Note): Int
 
-    fun delete(id: Int): Int
+    fun delete(id: String): Int
 
     fun get(): MutableList<Note>
 

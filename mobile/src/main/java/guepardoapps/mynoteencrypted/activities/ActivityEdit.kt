@@ -25,16 +25,21 @@ class ActivityEdit : Activity() {
 
     private lateinit var context: Context
 
-    private var dialogController: IDialogController = DialogController(this)
+    private val dialogController: IDialogController = DialogController(this)
 
     private var noteEdited: Boolean = false
+
     private lateinit var note: Note
 
-    private lateinit var titleView: EditText
-    private lateinit var contentView: EditText
-    private lateinit var dateTimeView: TextView
-    private lateinit var btnEditSave: FloatingActionButton
     private lateinit var btnDelete: FloatingActionButton
+
+    private lateinit var btnEditSave: FloatingActionButton
+
+    private lateinit var contentView: EditText
+
+    private lateinit var dateTimeView: TextView
+
+    private lateinit var titleView: EditText
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,8 +53,7 @@ class ActivityEdit : Activity() {
 
         context = this
 
-        val noteId = intent.extras!!.getLong(getString(R.string.bundleDataId))
-        note = DatabaseController.instance.get().first { x -> x.id == noteId }
+        note = DatabaseController.instance.get().first { x -> x.id == intent.extras!!.getString(getString(R.string.bundleDataId)) }
 
         titleView.setText(note.title)
         contentView.setText(note.content)
@@ -117,17 +121,8 @@ class ActivityEdit : Activity() {
         return super.onKeyDown(keyCode, event)
     }
 
-
-    private fun updateNote() {
-        if (DatabaseController.instance.update(note) == 0) {
-            Toasty.error(context, getString(R.string.updateFailedToasty), Toast.LENGTH_LONG).show()
-        } else {
-            resetEditable()
-        }
-    }
-
     private fun deleteNote() {
-        if (DatabaseController.instance.delete(note.id.toInt()) == 0) {
+        if (DatabaseController.instance.delete(note.id) == 0) {
             Toasty.error(context, getString(R.string.deleteFailedToasty), Toast.LENGTH_LONG).show()
         }
         finish()
@@ -139,5 +134,13 @@ class ActivityEdit : Activity() {
         btnDelete.visibility = View.VISIBLE
         titleView.isFocusable = false
         contentView.isFocusable = false
+    }
+
+    private fun updateNote() {
+        if (DatabaseController.instance.update(note) == 0) {
+            Toasty.error(context, getString(R.string.updateFailedToasty), Toast.LENGTH_LONG).show()
+        } else {
+            resetEditable()
+        }
     }
 }

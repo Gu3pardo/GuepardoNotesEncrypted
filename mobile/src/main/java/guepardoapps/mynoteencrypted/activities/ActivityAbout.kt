@@ -18,6 +18,8 @@ import guepardoapps.mynoteencrypted.controller.MailController
 
 class ActivityAbout : MaterialAboutActivity() {
 
+    override fun getActivityTitle(): CharSequence? = getString(R.string.about)
+
     override fun getMaterialAboutList(context: Context): MaterialAboutList {
         val infoCard: MaterialAboutCard = MaterialAboutCard.Builder()
                 .addItem(
@@ -74,6 +76,4 @@ class ActivityAbout : MaterialAboutActivity() {
                 .addCard(gitHubCard)
                 .build()
     }
-
-    override fun getActivityTitle(): CharSequence? = getString(R.string.about)
 }

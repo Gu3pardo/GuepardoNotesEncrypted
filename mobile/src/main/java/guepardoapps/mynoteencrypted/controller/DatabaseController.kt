@@ -9,9 +9,9 @@ import net.sqlcipher.database.SQLiteDatabase
 
 internal class DatabaseController private constructor() : IDatabaseController {
 
-    private var initialized: Boolean = false
-
     private var dbNote: DbNote? = null
+
+    private var initialized: Boolean = false
 
     private object Holder {
         @SuppressLint("StaticFieldLeak")
@@ -29,47 +29,26 @@ internal class DatabaseController private constructor() : IDatabaseController {
 
         SQLiteDatabase.loadLibs(context)
 
-        try {
+        return try {
             dbNote = DbNote(context, passphrase)
             initialized = true
+            true
         } catch (sqlException: SQLException) {
-            return false
+            false
         }
-
-        return true
     }
 
-    override fun add(note: Note): Long =
-            if (!initialized) {
-                -1
-            } else {
-                dbNote!!.add(note)
-            }
+    override fun add(note: Note): Long = if (!initialized) { -1 } else { dbNote!!.add(note) }
 
-    override fun update(note: Note): Int =
-            if (!initialized) {
-                -1
-            } else {
-                dbNote!!.update(note)
-            }
+    override fun update(note: Note): Int = if (!initialized) { -1 } else {  dbNote!!.update(note) }
 
-    override fun delete(id: Int): Int =
-            if (!initialized) {
-                -1
-            } else {
-                dbNote!!.delete(id)
-            }
+    override fun delete(id: String): Int = if (!initialized) { -1 } else { dbNote!!.delete(id) }
 
-    override fun get(): MutableList<Note> =
-            if (!initialized) {
-                mutableListOf()
-            } else {
-                dbNote!!.get()
-            }
+    override fun get(): MutableList<Note> = if (!initialized) { mutableListOf() } else { dbNote!!.get() }
 
     override fun clearAll() {
         if (initialized) {
-            dbNote!!.get().forEach { x -> dbNote!!.delete(x.id.toInt()) }
+            dbNote!!.get().forEach { x -> dbNote!!.delete(x.id) }
         }
     }
 

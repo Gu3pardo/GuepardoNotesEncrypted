@@ -13,15 +13,6 @@ internal class NavigationController(val context: Context) : INavigationControlle
         }
     }
 
-    override fun navigateWithData(activity: Class<*>, data: Bundle, finish: Boolean) {
-        val navigateIntent = Intent(context, activity)
-        navigateIntent.putExtras(data)
-        context.startActivity(navigateIntent)
-        if (finish) {
-            (context as Activity).finish()
-        }
-    }
-
     override fun navigateToOtherApp(packageName: String, finish: Boolean): Boolean {
         val packageManager = context.packageManager
         try {
@@ -38,6 +29,15 @@ internal class NavigationController(val context: Context) : INavigationControlle
             return true
         } catch (e: Exception) {
             return false
+        }
+    }
+
+    override fun navigateWithData(activity: Class<*>, data: Bundle, finish: Boolean) {
+        val navigateIntent = Intent(context, activity)
+        navigateIntent.putExtras(data)
+        context.startActivity(navigateIntent)
+        if (finish) {
+            (context as Activity).finish()
         }
     }
 }

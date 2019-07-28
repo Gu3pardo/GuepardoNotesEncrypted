@@ -19,6 +19,7 @@ import guepardoapps.mynoteencrypted.model.Note
 internal class NoteListAdapter(private val context: Context, private val list: Array<Note>) : BaseAdapter() {
 
     private val navigationController: NavigationController = NavigationController(context)
+
     private val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
     private class Holder {
@@ -31,7 +32,7 @@ internal class NoteListAdapter(private val context: Context, private val list: A
 
     override fun getItem(position: Int): Note = list[position]
 
-    override fun getItemId(position: Int): Long = list[position].id
+    override fun getItemId(position: Int): Long = position.toLong()
 
     override fun getCount(): Int = list.size
 
@@ -39,32 +40,33 @@ internal class NoteListAdapter(private val context: Context, private val list: A
     override fun getView(index: Int, convertView: View?, parentView: ViewGroup?): View {
         val rowView: View = inflater.inflate(R.layout.list_item, null)
 
-        val note = list[index]
+        Holder().apply {
+            val note = list[index]
 
-        val holder = Holder()
-        holder.title = rowView.findViewById(R.id.itemTitle)
-        holder.content = rowView.findViewById(R.id.itemContent)
-        holder.dateTime = rowView.findViewById(R.id.itemDateTime)
+            title = rowView.findViewById(R.id.itemTitle)
+            content = rowView.findViewById(R.id.itemContent)
+            dateTime = rowView.findViewById(R.id.itemDateTime)
 
-        holder.edit = rowView.findViewById(R.id.btnEdit)
-        holder.delete = rowView.findViewById(R.id.btnDelete)
+            edit = rowView.findViewById(R.id.btnEdit)
+            delete = rowView.findViewById(R.id.btnDelete)
 
-        holder.title.text = note.title
-        holder.content.text = note.content
-        holder.dateTime.text = "${note.dateString} / ${note.timeString}"
+            title.text = note.title
+            content.text = note.content
+            dateTime.text = "${note.dateString} / ${note.timeString}"
 
-        holder.edit.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putLong(context.getString(R.string.bundleDataId), note.id)
-            navigationController.navigateWithData(ActivityEdit::class.java, bundle, false)
-        }
+            edit.setOnClickListener {
+                val bundle = Bundle()
+                bundle.putString(context.getString(R.string.bundleDataId), note.id)
+                navigationController.navigateWithData(ActivityEdit::class.java, bundle, false)
+            }
 
-        holder.delete.setOnClickListener {
-            MaterialDialog(context).show {
-                title(text = context.getString(R.string.delete))
-                message(text = String.format(context.getString(R.string.deleteRequest), note.title))
-                positiveButton(text = context.getString(R.string.yes)) { DatabaseController.instance.delete(note.id.toInt()) }
-                negativeButton(text = context.getString(R.string.no))
+            delete.setOnClickListener {
+                MaterialDialog(context).show {
+                    title(text = context.getString(R.string.delete))
+                    message(text = String.format(context.getString(R.string.deleteRequest), note.title))
+                    positiveButton(text = context.getString(R.string.yes)) { DatabaseController.instance.delete(note.id) }
+                    negativeButton(text = context.getString(R.string.no))
+                }
             }
         }
 
