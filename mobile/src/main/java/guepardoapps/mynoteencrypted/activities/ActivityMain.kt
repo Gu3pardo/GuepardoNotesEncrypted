@@ -2,6 +2,7 @@ package guepardoapps.mynoteencrypted.activities
 
 import android.app.Activity
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.View
 import android.widget.ListView
 import android.widget.ProgressBar
@@ -12,6 +13,8 @@ import guepardoapps.mynoteencrypted.customadapter.NoteListAdapter
 
 @ExperimentalUnsignedTypes
 class ActivityMain : Activity() {
+
+    private val databaseController: DatabaseController = DatabaseController.instance
 
     private var activityCreated: Boolean = false
 
@@ -33,13 +36,31 @@ class ActivityMain : Activity() {
         activityCreated = true
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        databaseController.dispose()
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            finish()
+            return true
+        }
+
+        return super.onKeyDown(keyCode, event)
+    }
+
     override fun onResume() {
         super.onResume()
 
         if (activityCreated) {
-            listView.adapter = NoteListAdapter(this, DatabaseController.instance.get().toTypedArray())
-            progressBar.visibility = View.GONE
-            listView.visibility = View.VISIBLE
+            reload()
         }
+    }
+
+    private fun reload() {
+        listView.adapter = NoteListAdapter(this, DatabaseController.instance.get().toTypedArray()) { reload() }
+        progressBar.visibility = View.GONE
+        listView.visibility = View.VISIBLE
     }
 }

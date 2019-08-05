@@ -32,11 +32,11 @@ class ActivityBoot : Activity() {
 
     private val databaseController: DatabaseController = DatabaseController.instance
 
-    private val sharedPreferenceController: SharedPreferenceController = SharedPreferenceController(this)
+    private lateinit var sharedPreferenceController: SharedPreferenceController
 
     private var doPasswordsMatch: Boolean = false
 
-    private var invalidInputCount: Int = sharedPreferenceController.load(getString(R.string.sharedPrefInvalidEnteredCount), 0)
+    private var invalidInputCount: Int = 0
 
     private var isPasswordValid: Boolean = false
 
@@ -46,6 +46,9 @@ class ActivityBoot : Activity() {
         super.onCreate(savedInstanceState)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         setContentView(R.layout.side_login)
+
+        sharedPreferenceController = SharedPreferenceController(this)
+        invalidInputCount = sharedPreferenceController.load(getString(R.string.sharedPrefInvalidEnteredCount), 0)
 
         passphraseInput = findViewById(R.id.passwordInput)
 
@@ -184,6 +187,7 @@ class ActivityBoot : Activity() {
                 databaseController.add(Note(id = ULID.random(), title = getString(R.string.title), content = resources.getString(R.string.example)))
                 Toasty.success(this, getString(R.string.saved), Toast.LENGTH_LONG).show()
                 dialog.dismiss()
+                NavigationController(this).navigate(ActivityMain::class.java, true)
             } else {
                 Toasty.error(this, getString(R.string.unknownError), Toast.LENGTH_LONG).show()
             }

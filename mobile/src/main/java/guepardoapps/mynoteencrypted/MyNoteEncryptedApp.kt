@@ -1,7 +1,6 @@
 package guepardoapps.mynoteencrypted
 
 import android.app.Application
-import guepardoapps.mynoteencrypted.controller.DatabaseController
 import guepardoapps.mynoteencrypted.utils.Logger
 
 class MyNoteEncryptedApp : Application() {
