@@ -10,8 +10,8 @@ android {
         applicationId "guepardoapps.mynoteencrypted"
         minSdkVersion 26
         targetSdkVersion 28
-        versionCode 20001
-        versionName "2.0.1.190805"
+        versionCode 20002
+        versionName "2.0.2.190810"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
 

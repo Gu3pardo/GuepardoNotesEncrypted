@@ -5,7 +5,6 @@
     <string name="send">Senden</string>
     <string name="save">Speichern</string>
     <string name="add">Hinzufügen</string>
-    <string name="addPlus">+</string>
     <string name="back">Zurück</string>
     <string name="set_bubble_state">Aktiviere floating Benachrichtigung</string>
     <string name="settings">Einstellungen</string>
@@ -68,9 +67,6 @@
     <string name="about">Über</string>
     <string name="author_title">Autor</string>
     <string name="version_title">Version</string>
-    <string name="email_title">E-Mail</string>
-    <string name="gitHubLink_title">GitHub</string>
-    <string name="homepageLink_title">Homepage</string>
 
     <string name="deleteRequest">Möchtest du die Notiz %s löschen?</string>
 

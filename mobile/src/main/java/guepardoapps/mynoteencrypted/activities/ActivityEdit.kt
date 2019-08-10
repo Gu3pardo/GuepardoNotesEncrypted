@@ -23,7 +23,7 @@ import guepardoapps.mynoteencrypted.model.Note
 
 class ActivityEdit : Activity() {
 
-    private lateinit var context: Context
+    private lateinit var activityContext: Context
 
     private val dialogController: IDialogController = DialogController(this)
 
@@ -51,12 +51,11 @@ class ActivityEdit : Activity() {
         btnEditSave = findViewById(R.id.btnEditSave)
         btnDelete = findViewById(R.id.btnDelete)
 
-        context = this
+        activityContext = this
 
         note = DatabaseController.instance.get().first { x -> x.id == intent.extras!!.getString(getString(R.string.bundleDataId)) }
 
         titleView.setText(note.title)
-        contentView.setText(note.content)
         dateTimeView.text = note.dateTimeString
 
         titleView.addTextChangedListener(object : TextWatcher {
@@ -71,24 +70,27 @@ class ActivityEdit : Activity() {
             }
         })
 
-        contentView.setScroller(Scroller(context))
-        contentView.isVerticalScrollBarEnabled = true
-        contentView.movementMethod = ScrollingMovementMethod()
-        contentView.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable) {}
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                noteEdited = true
-                btnEditSave.visibility = View.VISIBLE
-                btnDelete.visibility = View.INVISIBLE
-                note.content = contentView.text.toString()
-                dateTimeView.text = note.dateTimeString
-            }
-        })
+        contentView.apply {
+            setText(note.content)
+            setScroller(Scroller(activityContext))
+            isVerticalScrollBarEnabled = true
+            movementMethod = ScrollingMovementMethod()
+            addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(s: Editable) {}
+                override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+                override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                    noteEdited = true
+                    btnEditSave.visibility = View.VISIBLE
+                    btnDelete.visibility = View.INVISIBLE
+                    note.content = contentView.text.toString()
+                    dateTimeView.text = note.dateTimeString
+                }
+            })
+        }
 
         btnEditSave.setOnClickListener {
             if (DatabaseController.instance.update(note) != 0) {
-                Toasty.error(context, getString(R.string.updateFailedToasty), Toast.LENGTH_LONG).show()
+                Toasty.error(activityContext, getString(R.string.updateFailedToasty), Toast.LENGTH_LONG).show()
             } else {
                 resetEditable()
             }
@@ -123,7 +125,7 @@ class ActivityEdit : Activity() {
 
     private fun deleteNote() {
         if (DatabaseController.instance.delete(note.id) == 0) {
-            Toasty.error(context, getString(R.string.deleteFailedToasty), Toast.LENGTH_LONG).show()
+            Toasty.error(activityContext, getString(R.string.deleteFailedToasty), Toast.LENGTH_LONG).show()
         }
         finish()
     }
@@ -138,7 +140,7 @@ class ActivityEdit : Activity() {
 
     private fun updateNote() {
         if (DatabaseController.instance.update(note) == 0) {
-            Toasty.error(context, getString(R.string.updateFailedToasty), Toast.LENGTH_LONG).show()
+            Toasty.error(activityContext, getString(R.string.updateFailedToasty), Toast.LENGTH_LONG).show()
         } else {
             resetEditable()
         }

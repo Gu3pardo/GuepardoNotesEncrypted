@@ -8,7 +8,7 @@
     <string name="send">Send</string>
     <string name="save">Save</string>
     <string name="add">Add</string>
-    <string name="addPlus">+</string>
+    <string name="addPlus" translatable="false">+</string>
     <string name="back">Back</string>
     <string name="set_bubble_state">Activate floating notification</string>
     <string name="settings">Settings</string>
@@ -72,13 +72,15 @@
     <string name="author_title">Author</string>
     <string name="author" translatable="false">Jonas Schubert\nGuepardoApps</string>
     <string name="version_title">Version</string>
-    <string name="version" translatable="false">2.0.1.190805</string>
-    <string name="email_title">E-Mail</string>
+    <string name="version" translatable="false">2.0.2.190810</string>
+    <string name="email_title" translatable="false">Mail</string>
     <string name="email" translatable="false">guepardoapps@gmail.com</string>
-    <string name="gitHubLink_title">GitHub</string>
+    <string name="gitHubLink_title" translatable="false">GitHub</string>
     <string name="gitHubLink" translatable="false">https://github.com/GuepardoApps-Releases/MyNoteEncrypted/</string>
-    <string name="homepageLink_title">Homepage</string>
+    <string name="homepageLink_title" translatable="false">Homepage</string>
     <string name="homepageLink" translatable="false">https://guepardoapps.github.io/</string>
+    <string name="special_thanks_title" translatable="false">Special thanks</string>
+    <string name="special_thanks" translatable="false">I want to thank my lovely wife for always supporting me and helping me to improve this application! நான் உன்னை காதலிக்கிறேன்</string>
 
     <string name="deleteRequest">Do you want to delete the note %s?</string>
 
