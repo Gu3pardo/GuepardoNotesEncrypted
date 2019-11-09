@@ -4,7 +4,7 @@
 [![Paypal](https://img.shields.io/badge/paypal-donate-blue.svg)](https://www.paypal.me/GuepardoApps)
 
 [![Build](https://img.shields.io/badge/build-success-green.svg)](./releases)
-[![Version](https://img.shields.io/badge/version-2.0.2.190810-blue.svg)](./releases)
+[![Version](https://img.shields.io/badge/version-2.0.3.191109-blue.svg)](./releases)
 [![API](https://img.shields.io/badge/API-26+-blue.svg)](https://android-arsenal.com/api?level=26)
 
 [![Platform](https://img.shields.io/badge/platform-Android-blue.svg)](https://www.android.com)
@@ -83,6 +83,12 @@ Further helpful links:
 
 - https://discuss.zetetic.net/t/sqlcipher-integration-problem/1487
 - https://stackoverflow.com/questions/40674016/android-app-crashes-with-unsatisfiedlinkerror-when-using-sqlcipher-and-crashlyti
+
+## Contributors
+
+| [<img alt="JonasSchubert" src="https://avatars0.githubusercontent.com/u/21952813?v=4&s=117" width="117"/>](https://github.com/JonasSchubert) |
+| :---------------------------------------------------------------------------------------------------------------------------------------: |
+| [Jonas Schubert](https://github.com/JonasSchubert) |
 
 ## License
 
